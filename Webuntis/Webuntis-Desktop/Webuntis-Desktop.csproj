@@ -8,4 +8,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Webuntis-API\Webuntis-API.csproj" />
+  </ItemGroup>
+
 </Project>

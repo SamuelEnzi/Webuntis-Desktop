@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "RCkUQBYfKPeQUcTJrETVQSLsMVJQ3TM7tlu49LieZxwQZXBA8i6aRdUiQMXrJ+otj38Rf3P39+T+3/D1/O4SZg==",
+  "dgSpecHash": "OFoBw6hpQb3RTZDzrdGBLBnWHz9KFE/oZYflt82g4fVCyU44Inmr10I7+7dqMbyfau/ACBD+qbMtLu8QJPuJTg==",
   "success": true,
   "projectFilePath": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Manamana\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -1,0 +1,11 @@
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\obj\Debug\net5.0\Webuntis-API.GeneratedMSBuildEditorConfig.editorconfig
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\obj\Debug\net5.0\Webuntis-API.AssemblyInfoInputs.cache
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\obj\Debug\net5.0\Webuntis-API.AssemblyInfo.cs
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\obj\Debug\net5.0\Webuntis-API.csproj.CoreCompileInputs.cache
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\bin\Debug\net5.0\Webuntis-API.deps.json
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\bin\Debug\net5.0\Webuntis-API.dll
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\bin\Debug\net5.0\ref\Webuntis-API.dll
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\bin\Debug\net5.0\Webuntis-API.pdb
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\obj\Debug\net5.0\Webuntis-API.dll
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\obj\Debug\net5.0\ref\Webuntis-API.dll
+E:\development\Webuntis-Desktop\Webuntis\Webuntis-API\obj\Debug\net5.0\Webuntis-API.pdb
