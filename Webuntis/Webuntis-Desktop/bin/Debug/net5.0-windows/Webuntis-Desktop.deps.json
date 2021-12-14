@@ -7,6 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v5.0": {
       "Webuntis-Desktop/1.0.0": {
+<<<<<<< Updated upstream
         "dependencies": {
           "Webuntis-API": "1.0.0"
         },
@@ -29,6 +30,11 @@
         "runtime": {
           "Webuntis-API.dll": {}
         }
+=======
+        "runtime": {
+          "Webuntis-Desktop.dll": {}
+        }
+>>>>>>> Stashed changes
       }
     }
   },
@@ -37,6 +43,7 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+<<<<<<< Updated upstream
     },
     "Newtonsoft.Json/13.0.1": {
       "type": "package",
@@ -49,6 +56,8 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+=======
+>>>>>>> Stashed changes
     }
   }
 }

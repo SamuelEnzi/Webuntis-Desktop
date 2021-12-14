@@ -1,6 +1,7 @@
 {
   "Version": 1,
   "ProjectMap": {
+<<<<<<< Updated upstream
     "ba4488d8-bdcf-4af1-a8d2-15b071982817": {
       "ProjectGuid": "ba4488d8-bdcf-4af1-a8d2-15b071982817",
       "DisplayName": "Webuntis-Desktop",
@@ -16,11 +17,24 @@
       "DisplayName": "WebuntisApiTest",
       "ColorIndex": 2
     },
+=======
+>>>>>>> Stashed changes
     "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Sonstige Dateien",
       "ColorIndex": -1
+<<<<<<< Updated upstream
     }
   },
   "NextColorIndex": 3
+=======
+    },
+    "ba4488d8-bdcf-4af1-a8d2-15b071982817": {
+      "ProjectGuid": "ba4488d8-bdcf-4af1-a8d2-15b071982817",
+      "DisplayName": "Webuntis-Desktop",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+>>>>>>> Stashed changes
 }

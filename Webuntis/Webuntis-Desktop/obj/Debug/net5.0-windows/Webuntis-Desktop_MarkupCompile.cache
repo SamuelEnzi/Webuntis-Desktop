@@ -4,16 +4,28 @@
 winexe
 C#
 .cs
+<<<<<<< Updated upstream
 E:\development\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\
+=======
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\
+>>>>>>> Stashed changes
 Webuntis_Desktop
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
+<<<<<<< Updated upstream
 E:\development\Webuntis-Desktop\Webuntis\Webuntis-Desktop\App.xaml
 1960094588
 
 3-1442485017
 1951521449783
+=======
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\App.xaml
+1960094588
+
+3-1442485017
+193-1891726104
+>>>>>>> Stashed changes
 Views\UserInterface.xaml;
 
 False

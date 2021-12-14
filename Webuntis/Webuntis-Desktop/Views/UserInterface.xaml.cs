@@ -23,5 +23,25 @@ namespace Webuntis_Desktop.Views
         {
             InitializeComponent();
         }
+
+        public void getData()
+        {
+            txtblck_output.Text = "hot funktioniert";
+        }
+
+
+
+        private void btn_getData_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtbx_password.Text != "" && txtbx_username.Text != "")
+                getData();
+        }
+
+        private void txtbx_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                if (txtbx_password.Text != "" && txtbx_username.Text != "")
+                    getData();
+        }
     }
 }

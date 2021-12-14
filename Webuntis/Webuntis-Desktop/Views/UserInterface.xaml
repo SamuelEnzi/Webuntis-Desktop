@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Webuntis_Desktop.Views"
         mc:Ignorable="d"
-        Title="UserInterface" Height="450" Width="800">
+        Title="UserInterface" Height="450" MinHeight="180" Width="800" MinWidth="450">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MaxWidth="300" MinWidth="200"/>
+            <ColumnDefinition Width="2*" MinWidth="250"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MaxHeight="50" MinHeight="10"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*" MaxHeight="30" MinHeight="15"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*" MaxHeight="30" MinHeight="15"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*" MinHeight="10"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="1" Grid.Row="1" Content="Username" Margin="0" Padding="0"/>
+            <TextBox Grid.Column="1" Grid.Row="2" x:Name="txtbx_username"  Margin="0" Padding="0" KeyDown="txtbx_KeyDown"/>
+
+            <Label Grid.Column="1" Grid.Row="4" Content="Password" Margin="0" Padding="0"/>
+            <TextBox Grid.Column="1" Grid.Row="5" x:Name="txtbx_password" Margin="0" Padding="0" KeyDown="txtbx_KeyDown"/>
+
+            <Button Grid.Column="1" Grid.Row="7" x:Name="btn_getData" Content="Proceed" Click="btn_getData_Click"/>
+        </Grid>
+
+        <Border/>
+        <TextBlock Grid.Column="1" x:Name="txtblck_output"/>
     </Grid>
 </Window>

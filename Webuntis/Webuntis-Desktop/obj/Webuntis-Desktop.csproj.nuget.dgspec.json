@@ -1,12 +1,13 @@
 {
   "format": 1,
   "restore": {
-    "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\Webuntis-Desktop.csproj": {}
+    "D:\\GitHub\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\Webuntis-Desktop.csproj": {}
   },
   "projects": {
-    "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj": {
+    "D:\\GitHub\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\Webuntis-Desktop.csproj": {
       "version": "1.0.0",
       "restore": {
+<<<<<<< Updated upstream
         "projectUniqueName": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj",
         "projectName": "Webuntis-API",
         "projectPath": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj",
@@ -75,21 +76,17 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\Webuntis-Desktop.csproj",
+=======
+        "projectUniqueName": "D:\\GitHub\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\Webuntis-Desktop.csproj",
+>>>>>>> Stashed changes
         "projectName": "Webuntis-Desktop",
-        "projectPath": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\Webuntis-Desktop.csproj",
-        "packagesPath": "C:\\Users\\Manamana\\.nuget\\packages\\",
-        "outputPath": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\obj\\",
+        "projectPath": "D:\\GitHub\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\Webuntis-Desktop.csproj",
+        "packagesPath": "C:\\Users\\Pos3ydon\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Manamana\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Pos3ydon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0-windows7.0"
@@ -101,11 +98,7 @@
         "frameworks": {
           "net5.0-windows7.0": {
             "targetAlias": "net5.0-windows",
-            "projectReferences": {
-              "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj": {
-                "projectPath": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -129,8 +122,20 @@
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Host.win-x64",
               "version": "[5.0.12, 5.0.12]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
             }
           ],
           "frameworkReferences": {

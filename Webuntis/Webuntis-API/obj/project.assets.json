@@ -48,30 +48,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Manamana\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Pos3ydon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj",
+      "projectUniqueName": "D:\\GitHub\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj",
       "projectName": "Webuntis-API",
-      "projectPath": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj",
-      "packagesPath": "C:\\Users\\Manamana\\.nuget\\packages\\",
-      "outputPath": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\obj\\",
+      "projectPath": "D:\\GitHub\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj",
+      "packagesPath": "C:\\Users\\Pos3ydon\\.nuget\\packages\\",
+      "outputPath": "D:\\GitHub\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Manamana\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Pos3ydon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -111,6 +101,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"

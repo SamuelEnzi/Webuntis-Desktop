@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 E:\development\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.csproj.AssemblyReference.cache
 E:\development\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Views\UserInterface.g.cs
 E:\development\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\App.g.cs
@@ -25,3 +26,28 @@ E:\development\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windo
 E:\development\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.pdb
 E:\development\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.genruntimeconfig.cache
 E:\development\Webuntis-Desktop\Webuntis\Webuntis-Desktop\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+=======
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\bin\Debug\net5.0-windows\Webuntis-Desktop.exe
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\bin\Debug\net5.0-windows\Webuntis-Desktop.deps.json
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\bin\Debug\net5.0-windows\Webuntis-Desktop.runtimeconfig.json
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\bin\Debug\net5.0-windows\Webuntis-Desktop.runtimeconfig.dev.json
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\bin\Debug\net5.0-windows\Webuntis-Desktop.dll
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\bin\Debug\net5.0-windows\ref\Webuntis-Desktop.dll
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\bin\Debug\net5.0-windows\Webuntis-Desktop.pdb
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.csproj.AssemblyReference.cache
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Views\UserInterface.g.cs
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\App.g.cs
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop_MarkupCompile.cache
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop_MarkupCompile.lref
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\App.baml
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Views\UserInterface.baml
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.g.resources
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.AssemblyInfoInputs.cache
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.AssemblyInfo.cs
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.csproj.CoreCompileInputs.cache
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.dll
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\ref\Webuntis-Desktop.dll
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.pdb
+D:\GitHub\Webuntis-Desktop\Webuntis\Webuntis-Desktop\obj\Debug\net5.0-windows\Webuntis-Desktop.genruntimeconfig.cache
+>>>>>>> Stashed changes

@@ -1,10 +1,20 @@
 {
   "version": 2,
+<<<<<<< Updated upstream
   "dgSpecHash": "OFoBw6hpQb3RTZDzrdGBLBnWHz9KFE/oZYflt82g4fVCyU44Inmr10I7+7dqMbyfau/ACBD+qbMtLu8QJPuJTg==",
   "success": true,
   "projectFilePath": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Manamana\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+=======
+  "dgSpecHash": "+wQ0RIsxwh7GxslldoHNL08DgXO1PCzPVh36SeVCFhIIoQy74xCXClAWbFHmfKs0w5N55oSrjUm7N2oInxpTbA==",
+  "success": true,
+  "projectFilePath": "D:\\GitHub\\Webuntis-Desktop\\Webuntis\\Webuntis-API\\Webuntis-API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Pos3ydon\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Pos3ydon\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Pos3ydon\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
+>>>>>>> Stashed changes
   ],
   "logs": []
 }
