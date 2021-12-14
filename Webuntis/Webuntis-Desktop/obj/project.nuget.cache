@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "g447AegNyqNYCGlaV5P0JJyc16LXikUzLiUzO0prtzwuHKBiVE5jp83snrdQvjLgjmJ4W0s9DCO7oDp+JyJdwg==",
+  "dgSpecHash": "qKa+4IjhBpVdIpoqLViEbozUW4yONjf3SwWL6is8ytampJuve3uCbPlflRZuzHilTMeg1/ojfzsB8ufj6JHa8w==",
   "success": true,
   "projectFilePath": "E:\\development\\Webuntis-Desktop\\Webuntis\\Webuntis-Desktop\\Webuntis-Desktop.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Manamana\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Manamana\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
   ],
   "logs": []
