@@ -48,5 +48,9 @@ namespace Webuntis_API
         public static T Deserialize<T>(this string json) => JsonConvert.DeserializeObject<T>(json);
 
         public static string Serialize(this object o) => JsonConvert.SerializeObject(o);
+
+        public static Models.GradeInfo.Root GetGrades(this Models.LessionInfo.Lesson lession, Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetGrades(userinfo.user.person.id, lession.id);
+
+        public static Models.LessionInfo.Root GetLessions(this Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetLessions(userinfo.user.person.id, userinfo.currentSchoolYear.id);
     }
 }
