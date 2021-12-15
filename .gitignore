@@ -1,3 +1,9 @@
+Webuntis/Webuntis-API/bin/*
+Webuntis/Webuntis-API/obj/*
+Webuntis/Webuntis-Desktop/bin/*
+Webuntis/Webuntis-Desktop/obj/*
+Webuntis/WebuntisApiTest/obj/*
+Webuntis/WebuntisApiTest/bin/*
 
 Webuntis/Webuntis-Desktop/bin/Debug/net5.0-windows/Webuntis-Desktop.dll
 Webuntis/Webuntis-Desktop/bin/Debug/net5.0-windows/Webuntis-Desktop.exe
