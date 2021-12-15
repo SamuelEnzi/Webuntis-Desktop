@@ -10,9 +10,13 @@ namespace WebuntisApiTest
         {
             Console.Write("Username: ");
             var un = Console.ReadLine();
+            Console.Clear();
 
             Console.Write("Password: ");
             var pw = Console.ReadLine();
+            Console.Clear();
+
+
             client = new WebuntisClient(new Secret(un, pw));
             bool success = client.Open();
             if (!success) return;
