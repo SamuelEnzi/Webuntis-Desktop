@@ -4,6 +4,7 @@ Webuntis/Webuntis-Desktop/bin/*
 Webuntis/Webuntis-Desktop/obj/*
 Webuntis/WebuntisApiTest/obj/*
 Webuntis/WebuntisApiTest/bin/*
+Webuntis/.vs/*
 
 Webuntis/Webuntis-Desktop/bin/Debug/net5.0-windows/Webuntis-Desktop.dll
 Webuntis/Webuntis-Desktop/bin/Debug/net5.0-windows/Webuntis-Desktop.exe
@@ -353,3 +354,7 @@ Webuntis/WebuntisApiTest/obj/project.nuget.cache
 Webuntis/WebuntisApiTest/obj/WebuntisApiTest.csproj.nuget.dgspec.json
 Webuntis/WebuntisApiTest/obj/WebuntisApiTest.csproj.nuget.g.props
 Webuntis/WebuntisApiTest/obj/WebuntisApiTest.csproj.nuget.g.targets
+Webuntis/.vs/Webuntis/DesignTimeBuild/.dtbcache.v2
+Webuntis/.vs/Webuntis/project-colors.json
+Webuntis/.vs/Webuntis/v17/.futdcache.v1
+Webuntis/.vs/Webuntis/v17/.suo
