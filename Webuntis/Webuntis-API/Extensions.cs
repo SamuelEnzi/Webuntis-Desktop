@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace Webuntis_API
@@ -52,5 +54,45 @@ namespace Webuntis_API
         public static Models.GradeInfo.Root GetGrades(this Models.LessionInfo.Lesson lession, Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetGrades(userinfo.user.person.id, lession.id);
 
         public static Models.LessionInfo.Root GetLessions(this Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetLessions(userinfo.user.person.id, userinfo.currentSchoolYear.id);
+
+        public static Models.AbsenceInfo.Root GetAbsences(this Models.UserInfo.Root userInfo, WebuntisClient c) => c.GetAbsences(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start.DateToShorDate(), userInfo.currentSchoolYear.dateRange.end.DateToShorDate());
+        
+        public static string TimeDiff(this int startDate, int endDate)
+        {
+            if (startDate.ToString() == null || endDate.ToString() == null) return "";
+
+            var start = startDate.ToString().ParseTimeTuple();
+            var end = endDate.ToString().ParseTimeTuple();
+
+            var diffHours = end.Item1 - start.Item1;
+            var diffMinutes = end.Item2 - start.Item2;
+
+            return $"{diffHours}h {diffMinutes}m";
+        }
+
+        public static Tuple<int, int> ParseTimeTuple (this string timeString)
+        {
+            if(timeString.Length == 4)
+            {
+                var hours = timeString.Substring(0, 2);
+                var minutes = timeString.Substring(2);
+
+                return new Tuple<int, int> (int.Parse(hours), int.Parse(minutes));
+            }
+
+            if (timeString.Length == 3)
+            {
+                var hours = timeString.Substring(0, 1);
+                var minutes = timeString.Substring(1);
+
+                return new Tuple<int, int>(int.Parse(hours), int.Parse(minutes));
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 20220616
+        /// </summary>
+        public static string DateToShorDate(this string date) => Regex.Replace(date, "[-]", string.Empty);
     }
 }

@@ -23,6 +23,11 @@ namespace WebuntisApiTest
 
             var UserInfo = client.GetUserInfo();
             var Lessions = UserInfo.GetLessions(client);
+
+            Console.WriteLine(UserInfo.currentSchoolYear.dateRange.start.DateToShorDate());
+            Console.WriteLine(UserInfo.currentSchoolYear.dateRange.end.DateToShorDate());
+            Console.WriteLine();
+
             foreach(var Lession in Lessions.data.lessons)
             {
                 double avr = 0.0;
@@ -39,6 +44,17 @@ namespace WebuntisApiTest
 
                 Console.WriteLine($"{Lession.subjects}: {gradesString} --- avr: ({avr})");
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Absenzen");
+
+            var absences = UserInfo.GetAbsences(client);
+            absences.data.absences.ForEach(absences =>
+            {
+                Console.WriteLine($"reason: {absences.excuseStatus} => {absences.createdUser} FROM {absences.startDate} to {absences.endDate} :: {absences.startTime.TimeDiff(absences.endTime)}");
+            });
+
+            Console.ReadKey();
         }        
     }
 }
