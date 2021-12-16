@@ -31,6 +31,20 @@ namespace Webuntis_API
             client.Headers.Add("Host", $"mese.webuntis.com");
             client.Headers.Add("Content-Type", $"application/x-www-form-urlencoded");
         }
+
+
+        public bool TryOpen()
+        {
+            try
+            {
+                return Open();
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         
         /// <summary>
         /// Open a Webuntis session

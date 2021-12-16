@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Webuntis_API;
 
@@ -8,20 +9,38 @@ namespace WebuntisApiTest
     internal class Program
     {
         static WebuntisClient client;
+        static Secret secret = null;
         static void Main(string[] args)
         {
-            Console.Write("Username: ");
-            var un = Console.ReadLine();
-            Console.Clear();
+            if (File.Exists("_rtData.efs"))
+                secret = Secret.LoadSecret(File.ReadAllText("_rtData.efs"));
 
-            Console.Write("Password: ");
-            var pw = Console.ReadLine();
-            Console.Clear();
+            if(secret == null)
+            {
+                Console.Write("Username: ");
+                var un = Console.ReadLine();
+                Console.Clear();
 
+                Console.Write("Password: ");
+                var pw = Console.ReadLine();
+                Console.Clear();
 
-            client = new WebuntisClient(new Secret(un, pw));
-            bool success = client.Open();
-            if (!success) return;
+                secret = new Secret(un, pw);
+
+                File.WriteAllText("_rtData.efs", secret.GetProtectedSecret());
+            }
+            else
+            {
+                Console.WriteLine($"loaded secret for {secret.Username}");
+            }
+
+            client = new WebuntisClient(secret);
+            bool success = client.TryOpen();
+            if (!success)
+            {
+                File.Delete("_rtData.efs");
+                return;
+            }
 
             var UserInfo = client.GetUserInfo();
             var Lessions = UserInfo.GetLessions(client);
@@ -70,8 +89,6 @@ namespace WebuntisApiTest
                 Console.WriteLine($"{grade.Subject}: {grade.gradesString} --- avr: ({grade.avr})");
             });
 
-
-
             var absences = UserInfo.GetAbsences(client, Webuntis_API.Models.AbsenceInfo.Status.All);
 
             if (absences.data.absences.Count > 0)
@@ -85,8 +102,6 @@ namespace WebuntisApiTest
                     Console.WriteLine($"reason: {absences.excuseStatus} => {absences.createdUser} FROM {absences.startDate} to {absences.endDate} :: {absences.startTime.TimeDiff(absences.endTime)}");
                 });
             }
-
-
 
             Console.ReadKey();
         }

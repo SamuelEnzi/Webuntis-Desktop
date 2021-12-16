@@ -9,7 +9,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\TschuggmalLogoF.png" />
+    <None Remove="Views\WebuntisLOGO.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\CascadiaMono.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Webuntis-API\Webuntis-API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\TschuggmalLogoF.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\WebuntisLOGO.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

@@ -7,12 +7,21 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\UserInterface.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\Login.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\UserInterface.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WebuntisDesktopRD.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:Webuntis_Desktop"
              ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WebuntisDesktopRD.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="{x:Type Window}">
+                <Setter Property="FontFamily" Value="Fonts/#CascadiaMono" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
