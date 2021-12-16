@@ -55,7 +55,7 @@ namespace Webuntis_API
 
         public static Models.LessionInfo.Root GetLessions(this Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetLessions(userinfo.user.person.id, userinfo.currentSchoolYear.id);
 
-        public static Models.AbsenceInfo.Root GetAbsences(this Models.UserInfo.Root userInfo, WebuntisClient c) => c.GetAbsences(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start.DateToShorDate(), userInfo.currentSchoolYear.dateRange.end.DateToShorDate());
+        public static Models.AbsenceInfo.Root GetAbsences(this Models.UserInfo.Root userInfo, WebuntisClient c, Models.AbsenceInfo.Status status) => c.GetAbsences(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start.DateToShorDate(), userInfo.currentSchoolYear.dateRange.end.DateToShorDate(), status);
         
         public static string TimeDiff(this int startDate, int endDate)
         {
@@ -64,10 +64,15 @@ namespace Webuntis_API
             var start = startDate.ToString().ParseTimeTuple();
             var end = endDate.ToString().ParseTimeTuple();
 
-            var diffHours = end.Item1 - start.Item1;
-            var diffMinutes = end.Item2 - start.Item2;
+            var startmin = start.Item2 + (start.Item1 * 60);
+            var endmin = end.Item2 + (end.Item1 * 60);
 
-            return $"{diffHours}h {diffMinutes}m";
+            var diffMin = endmin - startmin;
+
+            var hours = (int)(diffMin/60);
+            var min = (double)((double)((double)(diffMin/60.0) - (double)hours) * 60.0);
+
+            return $"{hours}h {min}m";
         }
 
         public static Tuple<int, int> ParseTimeTuple (this string timeString)

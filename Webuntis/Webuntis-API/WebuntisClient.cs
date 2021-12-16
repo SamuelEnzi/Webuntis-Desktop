@@ -142,9 +142,9 @@ namespace Webuntis_API
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public Models.AbsenceInfo.Root GetAbsences(int personID, string startDate, string endDate)
+        public Models.AbsenceInfo.Root GetAbsences(int personID, string startDate, string endDate, Models.AbsenceInfo.Status status)
         {
-            var url = webuntisBase.GetAbsenceEndpoint(personID, startDate, endDate);
+            var url = webuntisBase.GetAbsenceEndpoint(personID, startDate, endDate, status);
             var info = client.DownloadString(url);
 
             return info.Deserialize<Models.AbsenceInfo.Root>();

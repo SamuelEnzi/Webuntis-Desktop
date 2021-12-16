@@ -59,4 +59,12 @@ namespace Webuntis_API.Models.AbsenceInfo
         public Data data { get; set; }
     }
 
+
+    public enum Status
+    {
+        All = -1,
+        excused = -2,
+        notexcused = -3,
+        open = 0
+    }
 }
