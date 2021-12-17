@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="Views\close.png" />
+    <None Remove="Views\GpoRzNrlEBb2Pw3Of9pwneaDyA0MvKXq.jpg" />
+    <None Remove="Views\Logout.png" />
     <None Remove="Views\TschuggmalLogoF.png" />
     <None Remove="Views\WebuntisLOGO.png" />
   </ItemGroup>
@@ -26,6 +28,8 @@
 
   <ItemGroup>
     <Resource Include="Views\close.png" />
+    <Resource Include="Views\GpoRzNrlEBb2Pw3Of9pwneaDyA0MvKXq.jpg" />
+    <Resource Include="Views\Logout.png" />
     <Resource Include="Views\TschuggmalLogoF.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

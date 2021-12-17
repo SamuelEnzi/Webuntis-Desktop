@@ -24,24 +24,15 @@ namespace Webuntis_Desktop.Views
             InitializeComponent();
         }
 
-        public void getData()
+        private void OnCloseClicked(object sender, MouseButtonEventArgs e) => Environment.Exit(0);
+
+        private void OnWindowDrag(object sender, MouseEventArgs e)
         {
-            txtblck_output.Text = "hot funktioniert";
-        }
-
-
-
-        private void btn_getData_Click(object sender, RoutedEventArgs e)
-        {
-            if (txtbx_password.Text != "" && txtbx_username.Text != "")
-                getData();
-        }
-
-        private void txtbx_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                if (txtbx_password.Text != "" && txtbx_username.Text != "")
-                    getData();
+            try
+            {
+                DragMove();
+            }
+            catch { }
         }
     }
 }
