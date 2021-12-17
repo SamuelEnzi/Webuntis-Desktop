@@ -20,14 +20,30 @@ namespace Webuntis_Desktop.Views
     /// </summary>
     public partial class Login : Window
     {
-        Secret? userSecret;
-        public Login(ref Secret? secret)
+        public Secret? userSecret = null;
+        public WebuntisClient? client = null;
+        public Login()
         {
-            userSecret = secret;
-            InitializeComponent();
+              InitializeComponent();
         }
 
+        private void OnCloseClicked(object sender, MouseButtonEventArgs e) => Environment.Exit(0);
 
+        private void OnLoginClicked(object sender, RoutedEventArgs e)
+        {
+            userSecret = new Secret(this.UI_UsernameInput.Input.Text, this.UI_PasswordInput.Input.Password);
 
+            client = new WebuntisClient(userSecret);
+
+            if (!client.TryOpen())
+            {
+                UI_StatusLable.Visibility = Visibility.Visible;
+                client.Dispose();
+                client = null;
+                return;
+            }
+
+            this.Close();
+        }
     }
 }

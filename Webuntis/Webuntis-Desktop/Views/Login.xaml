@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Webuntis_Desktop.Views"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:webui="clr-namespace:Webuntis_Desktop.UserControls"
         mc:Ignorable="d"
         Title="Login" Height="400" Width="650" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" WindowStartupLocation="CenterScreen">
     <Grid>
@@ -18,10 +19,10 @@
             <Grid Grid.Column="0">
                 <StackPanel Margin="40">
                     <StackPanel Margin="0" Orientation="Horizontal">
-                        <Label Padding="0 5 0 5" Margin="0"  FontWeight="Bold">Heute</Label>
-                        <Label  Content="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dddd, MMMM dd, yyyy}'}"></Label>
+                        <Label FontFamily="/Fonts/#Cascadia Mono" Padding="0 5 0 5" Margin="0"  FontWeight="Bold">Heute</Label>
+                        <Label FontFamily="/Fonts/#Cascadia Mono" Content="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dddd, MMMM dd, yyyy}'}"></Label>
                     </StackPanel>
-                    <TextBlock  FontWeight="Bold" FontSize="24"  TextWrapping="Wrap">LBS Brixen "Ch.J.Tschuggmall"</TextBlock>
+                    <TextBlock FontFamily="/Fonts/#Cascadia Mono"  FontWeight="Bold" FontSize="24"  TextWrapping="Wrap">LBS Brixen "Ch.J.Tschuggmall"</TextBlock>
                     <Image Margin="60" RenderOptions.BitmapScalingMode="Fant" Height="150" Source="/Views/WebuntisLOGO.png"></Image>
                 </StackPanel>
 
@@ -31,13 +32,14 @@
             <Rectangle Grid.Column="1" Fill="#FFFFFF"/>
 
             <Grid Grid.Column="1">
+                <Image VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" RenderOptions.BitmapScalingMode="Fant" Cursor="Hand" Height="15" Source="/Views/close.png" MouseUp="OnCloseClicked"></Image>
                 <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                    <TextBox Style="{DynamicResource Webuntis_TextBox}"></TextBox>
-                    <PasswordBox Password="password"></PasswordBox>
-                    <Button>Login</Button>
+                    <webui:WU_TextBox Margin="5" FontSize="15" x:Name="UI_UsernameInput" Placeholder="Username"></webui:WU_TextBox>
+                    <webui:WU_PasswordBox Margin="5 0 5 2" FontSize="15" x:Name="UI_PasswordInput" Placeholder="Password"></webui:WU_PasswordBox>
+                    <Label Visibility="Hidden" FontSize="10" FontFamily="/Fonts/#Cascadia Mono" Foreground="#FF6033" Margin="10 0 10 0" Padding="0" x:Name="UI_StatusLable">Invalid user name and/or password</Label>
+                    <Button FontSize="15" Style="{DynamicResource Webuntis_Butto}" Margin="5 25 5 5" FontFamily="/Fonts/#Cascadia Mono" BorderBrush="{x:Null}" Background="#FFC1C1C1" Click="OnLoginClicked">Login</Button>
                 </StackPanel>
             </Grid>
-            
         </Grid>
     </Grid>
 </Window>

@@ -10,7 +10,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="{x:Type Window}">
-                <Setter Property="FontFamily" Value="Fonts/#CascadiaMono" />
+                <Setter Property="FontFamily" Value="/Fonts/#Cascadia Mono" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

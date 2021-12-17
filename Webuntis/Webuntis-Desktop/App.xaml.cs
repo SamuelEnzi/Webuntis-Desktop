@@ -33,8 +33,20 @@ namespace Webuntis_Desktop
 
             if (UserSecret == null)
             {
-                Views.Login login = new Views.Login(ref UserSecret);
+                Views.Login login = new Views.Login();
                 login.ShowDialog();
+
+                UserSecret = login.userSecret;
+                WebuntisClient = login.client;
+
+                File.WriteAllText(filename, UserSecret!.GetProtectedSecret());
+            }
+
+            if (UserSecret != null)
+                MessageBox.Show(UserSecret.Username);
+            else
+            {
+                MessageBox.Show("no secret");
             }
 
             Views.UserInterface ui = new Views.UserInterface();

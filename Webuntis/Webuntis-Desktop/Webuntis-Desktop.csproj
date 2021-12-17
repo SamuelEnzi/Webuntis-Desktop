@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\close.png" />
     <None Remove="Views\TschuggmalLogoF.png" />
     <None Remove="Views\WebuntisLOGO.png" />
   </ItemGroup>
@@ -24,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\close.png" />
     <Resource Include="Views\TschuggmalLogoF.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
