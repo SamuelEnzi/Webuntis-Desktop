@@ -82,7 +82,7 @@
                     <Grid Grid.Row="2" Margin="10 20 100 10">
                         <StackPanel>
                             <StackPanel Margin="5" Orientation="Horizontal">
-                                <Image RenderOptions.BitmapScalingMode="Fant" Margin="0" Source="/Views/GpoRzNrlEBb2Pw3Of9pwneaDyA0MvKXq.jpg"  Height="60" Width="60" >
+                                <Image x:Name="UI_ProfilePicture" RenderOptions.BitmapScalingMode="Fant" Margin="0" Source="/Views/GpoRzNrlEBb2Pw3Of9pwneaDyA0MvKXq.jpg"  Height="60" Width="60" >
                                     <Image.OpacityMask>
                                         <VisualBrush Stretch="Uniform"  >
                                             <VisualBrush.Visual>
@@ -93,8 +93,8 @@
                                 </Image>
 
                                 <StackPanel Margin="10" VerticalAlignment="Center">
-                                    <Label FontFamily="/Fonts/#Cascadia Mono" FontSize="19" Padding="0" Foreground="#FF484848" >Name</Label>
-                                    <Label FontFamily="/Fonts/#Cascadia Mono" FontSize="12" Padding="0" Foreground="#FF848484" >Schüler</Label>
+                                    <Label x:Name="UI_UserName" FontFamily="/Fonts/#Cascadia Mono" FontSize="19" Padding="0" Foreground="#FF484848" >Name</Label>
+                                    <Label x:Name="UI_UserStatus" FontFamily="/Fonts/#Cascadia Mono" FontSize="12" Padding="0" Foreground="#FF848484" >Schüler</Label>
                                 </StackPanel>
                             </StackPanel>
 

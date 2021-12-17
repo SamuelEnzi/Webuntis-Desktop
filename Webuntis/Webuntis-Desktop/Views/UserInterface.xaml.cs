@@ -22,14 +22,22 @@ namespace Webuntis_Desktop.Views
     /// </summary>
     public partial class UserInterface : Window
     {
-         WebuntisClient client;
+        WebuntisClient client;
 
         public UserInterface(WebuntisClient client)
         {
             InitializeComponent();
 
             this.client = client;
-            
+
+            var userData = client.GetUserInfo();
+
+            UI_UserName.Content = userData.user.person.displayName;
+            UI_UserStatus.Content = userData.user.roles.Aggregate((x, y) => x + ", " + y);
+
+            UI_ProfilePicture.Source = Helpers.WebWorker.ImageFromUrl(userData.user.person.imageUrl);
+
+
             UI_ModuleListView.Items.Add(new Module("Übersicht", "Ressources/Uebersicht.png", new Overview()));
             UI_ModuleListView.Items.Add(new Module("Mein Stundenplan" , "Ressources/Stundenplan.png"));
             UI_ModuleListView.Items.Add(new Module("Abwesenheiten", "Ressources/Abwesenheiten.png"));
