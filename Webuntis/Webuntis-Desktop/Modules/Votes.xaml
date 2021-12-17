@@ -9,6 +9,6 @@
       Title="Votes">
 
     <Grid>
-        <Label x:Name="Lable">Votes</Label>
+        <DataGrid x:Name="UI_votesOutput"/>
     </Grid>
 </Page>
