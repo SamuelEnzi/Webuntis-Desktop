@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Webuntis_Desktop.Models;
+using Webuntis_Desktop.Modules;
+using Webuntis_API;
 
 namespace Webuntis_Desktop.Views
 {
@@ -19,9 +22,18 @@ namespace Webuntis_Desktop.Views
     /// </summary>
     public partial class UserInterface : Window
     {
-        public UserInterface()
+         WebuntisClient client;
+
+        public UserInterface(WebuntisClient client)
         {
             InitializeComponent();
+
+            this.client = client;
+            
+            UI_ModuleListView.Items.Add(new Module("Übersicht", "Ressources/Uebersicht.png", new Overview()));
+            UI_ModuleListView.Items.Add(new Module("Mein Stundenplan" , "Ressources/Stundenplan.png"));
+            UI_ModuleListView.Items.Add(new Module("Abwesenheiten", "Ressources/Abwesenheiten.png"));
+            UI_ModuleListView.Items.Add(new Module("Noten", "Ressources/Noten.png", new Votes()));
         }
 
         private void OnCloseClicked(object sender, MouseButtonEventArgs e) => Environment.Exit(0);
@@ -34,5 +46,22 @@ namespace Webuntis_Desktop.Views
             }
             catch { }
         }
+
+        private void OnModuleSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (UI_ModuleListView.SelectedItem == null) return;
+
+            var selectedModule = (Module)UI_ModuleListView.SelectedItem;
+
+            if (selectedModule.module == null)
+            {
+                UI_ModuleFrame.Content = null;
+                return;
+            }
+
+            UI_ModuleFrame.Content = (Page)selectedModule.module.Display(client);
+        }
     }
+
+
 }

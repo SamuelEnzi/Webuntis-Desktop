@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Modules\Overview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Modules\Votes.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\WU_PasswordBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -21,6 +27,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Modules\Overview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Votes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\WU_PasswordBox.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -15,7 +15,6 @@
                 <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" RenderOptions.BitmapScalingMode="Fant" Cursor="Hand" Height="15" Source="/Views/close.png" MouseUp="OnCloseClicked"></Image>
 
             <Grid Grid.Column="0" >
                 <Border BorderThickness="0.5" BorderBrush="#FF191919" Opacity="0.67" >
@@ -38,6 +37,46 @@
                             </StackPanel>
                         </StackPanel>
                         <Rectangle Cursor="SizeAll" Fill="Transparent" x:Name="UI_GrabPlane" MouseMove="OnWindowDrag"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <ListView Style="{DynamicResource Webuntis_ListView}" Margin="0 15 0 0" x:Name="UI_ModuleListView" VirtualizingPanel.IsVirtualizing="True" Background="{x:Null}" BorderBrush="{x:Null}" SelectionChanged="OnModuleSelectionChanged">
+                            <ListView.Resources>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListViewItem">
+                                                <Border Name="Border" Padding="2" SnapsToDevicePixels="true">
+                                                    <ContentPresenter />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSelected" Value="true">
+                                                        <Setter Property="Background" Value="#777879"  />
+                                                        <Setter Property="Opacity" Value="0.7"  />
+                                                    </Trigger>
+                                  
+                                                  
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.Resources>
+                            
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0">
+                                        <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                            <Image RenderOptions.BitmapScalingMode="Fant" Margin="5 0 15 0" Width="25" Height="25" Source="{Binding Path=Image}"/>
+                                            <Label x:Name="Name" FontSize="16" FontFamily="/Fonts/#Cascadia Mono" Content="{Binding Path=Name}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                           
+
+                        </ListView>
                     </Grid>
                     
                     <Grid Grid.Row="2" Margin="10 20 100 10">
@@ -67,6 +106,13 @@
                     </Grid>
                 </Grid>
             </Grid>
+
+            <Grid Grid.Column="1">
+                <Frame NavigationUIVisibility="Hidden" x:Name="UI_ModuleFrame">
+                    
+                </Frame>
+            </Grid>
         </Grid>
+        <Image Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" RenderOptions.BitmapScalingMode="Fant" Cursor="Hand" Height="15" Source="/Views/close.png" MouseUp="OnCloseClicked"></Image>
     </Grid>
 </Window>
