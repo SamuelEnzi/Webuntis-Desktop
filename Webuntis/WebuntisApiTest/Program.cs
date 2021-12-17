@@ -43,7 +43,7 @@ namespace WebuntisApiTest
             }
 
             var UserInfo = client.GetUserInfo();
-            var Lessions = UserInfo.GetLessions(client);
+            var Lessions = UserInfo.GetLessons(client);
 
             List<Grade> gradesCollection = new List<Grade>();
 

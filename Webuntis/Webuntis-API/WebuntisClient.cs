@@ -127,12 +127,12 @@ namespace Webuntis_API
         /// <param name="personID"></param>
         /// <param name="schoolyearID"></param>
         /// <returns></returns>
-        public Models.LessionInfo.Root GetLessions(int personID, int schoolyearID = 7)
+        public Models.LessonInfo.Root GetLessons(int personID, int schoolyearID = 7)
         {
-            var url = webuntisBase.GetLessionsEndpoint(personID, schoolyearID);
+            var url = webuntisBase.GetLessonsEndpoint(personID, schoolyearID);
             var LessionInfo = client.DownloadString(url);
 
-            return LessionInfo.Deserialize<Models.LessionInfo.Root>();
+            return LessionInfo.Deserialize<Models.LessonInfo.Root>();
         }
 
         /// <summary>

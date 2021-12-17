@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Webuntis_API.Models.LessionInfo
+namespace Webuntis_API.Models.LessonInfo
 {
     public class Lesson
     {

@@ -51,9 +51,9 @@ namespace Webuntis_API
 
         public static string Serialize(this object o) => JsonConvert.SerializeObject(o);
 
-        public static Models.GradeInfo.Root GetGrades(this Models.LessionInfo.Lesson lession, Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetGrades(userinfo.user.person.id, lession.id);
+        public static Models.GradeInfo.Root GetGrades(this Models.LessonInfo.Lesson lession, Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetGrades(userinfo.user.person.id, lession.id);
 
-        public static Models.LessionInfo.Root GetLessions(this Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetLessions(userinfo.user.person.id, userinfo.currentSchoolYear.id);
+        public static Models.LessonInfo.Root GetLessons(this Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetLessons(userinfo.user.person.id, userinfo.currentSchoolYear.id);
 
         public static Models.AbsenceInfo.Root GetAbsences(this Models.UserInfo.Root userInfo, WebuntisClient c, Models.AbsenceInfo.Status status) => c.GetAbsences(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start.DateToShorDate(), userInfo.currentSchoolYear.dateRange.end.DateToShorDate(), status);
         
