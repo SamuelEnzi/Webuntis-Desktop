@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Webuntis_Desktop.Modules"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      
       Title="Votes">
 
     <Grid>
-        <DataGrid x:Name="UI_votesOutput"/>
+        <DataGrid x:Name="UI_votesOutput" Background="{x:Null}"/>
     </Grid>
 </Page>

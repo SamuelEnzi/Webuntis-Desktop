@@ -43,6 +43,8 @@ namespace Webuntis_Desktop.Views
             UI_ModuleListView.Items.Add(new Module("Mein Stundenplan" , "Ressources/Stundenplan.png"));
             UI_ModuleListView.Items.Add(new Module("Abwesenheiten", "Ressources/Abwesenheiten.png"));
             UI_ModuleListView.Items.Add(new Module("Noten", "Ressources/Noten.png", new Votes()));
+
+            UI_ModuleListView.SelectedIndex = 0;
         }
 
         private void OnCloseClicked(object sender, MouseButtonEventArgs e) => Environment.Exit(0);
@@ -60,6 +62,9 @@ namespace Webuntis_Desktop.Views
         {
             if (UI_ModuleListView.SelectedItem == null) return;
 
+
+            UI_ModuleListView.IsEnabled = false;
+
             var selectedModule = (Module)UI_ModuleListView.SelectedItem;
 
             if (selectedModule.module == null)
@@ -68,8 +73,20 @@ namespace Webuntis_Desktop.Views
                 return;
             }
 
+            selectedModule.module.OnFinishedLoading += OnFinishedLoading;
+
             UI_ModuleFrame.Content = (Page)selectedModule.module.Display(client);
             new Thread(() => selectedModule.module.Render()).Start();
+        }
+
+        private void OnFinishedLoading(object sender)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var selectedModule = (Module)UI_ModuleListView.SelectedItem;
+                selectedModule!.module.OnFinishedLoading -= OnFinishedLoading;
+                UI_ModuleListView.IsEnabled = true;
+            });
         }
     }
 

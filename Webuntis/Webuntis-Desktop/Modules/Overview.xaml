@@ -4,11 +4,33 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Webuntis_Desktop.Modules"
+      xmlns:webui="clr-namespace:Webuntis_Desktop.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="Overview">
+    <Page.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ClassBookEntryDataTemplate" x:Name="ClassBookEntryDataTemplate">
+                <ListView>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0">
+                                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <Label x:Name="Name" FontSize="14" FontFamily="/Fonts/#Cascadia Mono" Content="TEST"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DataTemplate>
+        </ResourceDictionary>
 
+        
+    </Page.Resources>
     <Grid>
-        <Label x:Name="Lable">Overview</Label>
+
+        <webui:WU_OverviewEntry MaxCellWidth="250" IconImageSource="/Ressources/Noten.png" x:Name="UI_ClassBookEntry" Title="Klassenbucheinträge" SubTitle="Aktueller Monat" Width="500" Height="400">
+
+        </webui:WU_OverviewEntry>
+
     </Grid>
 </Page>

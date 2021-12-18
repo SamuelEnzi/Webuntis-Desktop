@@ -24,6 +24,9 @@ namespace Webuntis_Desktop.Modules
     {
         WebuntisClient client;
         public Votes() => InitializeComponent();
+
+        public event IModule.OnFinishedLoadingEventHandler OnFinishedLoading;
+
         public object Display(WebuntisClient client)
         {
             this.client = client;
@@ -78,6 +81,8 @@ namespace Webuntis_Desktop.Modules
                     UI_votesOutput.Items.Add(subject);
                 });
             });
+
+            OnFinishedLoading?.Invoke(this);
         }
     }
 }

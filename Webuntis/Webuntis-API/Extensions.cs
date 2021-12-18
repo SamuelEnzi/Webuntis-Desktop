@@ -57,6 +57,7 @@ namespace Webuntis_API
 
         public static Models.AbsenceInfo.Root GetAbsences(this Models.UserInfo.Root userInfo, WebuntisClient c, Models.AbsenceInfo.Status status) => c.GetAbsences(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start.DateToShorDate(), userInfo.currentSchoolYear.dateRange.end.DateToShorDate(), status);
         
+        public static Models.ClassRegEventsInfo.Root GetClassRegEvents(this Models.UserInfo.Root userInfo, WebuntisClient c) => c.GetClassRegEvents(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start, userInfo.currentSchoolYear.dateRange.end);
         public static string TimeDiff(this int startDate, int endDate)
         {
             if (startDate.ToString() == null || endDate.ToString() == null) return "";

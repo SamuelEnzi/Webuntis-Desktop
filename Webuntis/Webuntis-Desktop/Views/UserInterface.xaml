@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="UserInterface" Height="720" MinHeight="450" Width="1080" MinWidth="800" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Rectangle Fill="#F5F6F8" RadiusX="5" RadiusY="5"/>
+        <Rectangle Fill="#F6F7F9" RadiusX="5" RadiusY="5"/>
 
         <Grid>
             <Grid.ColumnDefinitions>

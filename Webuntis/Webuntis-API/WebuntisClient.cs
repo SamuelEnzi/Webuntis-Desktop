@@ -9,8 +9,9 @@ namespace Webuntis_API
 {
     public class WebuntisClient : IDisposable
     {
-        private WebClient client = new WebClient();
         private WebuntisBase webuntisBase = new WebuntisBase();
+
+        public WebClient client = new WebClient();
         public SessionInfo sessionInfo { get; private set; } = new SessionInfo();
         public Secret Secret { get; private set; }
 
@@ -164,6 +165,20 @@ namespace Webuntis_API
             return info.Deserialize<Models.AbsenceInfo.Root>();
         }
 
+        /// <summary>
+        /// Load ClassRegEvents
+        /// </summary>
+        /// <param name="personID"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public Models.ClassRegEventsInfo.Root GetClassRegEvents(int personID, string startDate, string endDate)
+        {
+            var url = webuntisBase.GetClassRegEventsEndpoint(personID, startDate, endDate);
+            var info = client.DownloadString(url);
+
+            return info.Deserialize<Models.ClassRegEventsInfo.Root>();
+        }
 
         /// <summary>
         /// add a header to requests
