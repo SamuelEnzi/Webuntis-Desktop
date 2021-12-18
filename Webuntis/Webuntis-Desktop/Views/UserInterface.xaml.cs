@@ -65,7 +65,7 @@ namespace Webuntis_Desktop.Views
         {
             if (UI_ModuleListView.SelectedItem == null) return;
 
-
+            UI_ProcessBar.Visibility = Visibility.Visible;
             UI_ModuleListView.IsEnabled = false;
 
             var selectedModule = (Module)UI_ModuleListView.SelectedItem;
@@ -89,6 +89,7 @@ namespace Webuntis_Desktop.Views
                 var selectedModule = (Module)UI_ModuleListView.SelectedItem;
 
                 selectedModule.module.OnFinishedLoading -= OnFinishedLoading;
+                UI_ProcessBar.Visibility = Visibility.Hidden;
                 UI_ModuleListView.IsEnabled = true;
             });
         }

@@ -103,6 +103,7 @@
                                 <Label FontSize="14" FontFamily="/Fonts/#Cascadia Mono" Margin="19 0 0 0">Abmelden</Label>
                             </StackPanel>
                         </StackPanel>
+                        <ProgressBar IsIndeterminate="True" x:Name="UI_ProcessBar" Visibility="Hidden" Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Foreground="#FFFE6033"></ProgressBar>
                     </Grid>
                 </Grid>
             </Grid>
