@@ -30,10 +30,10 @@
 
                     <Grid>
                         <StackPanel Margin="10" Orientation="Horizontal">
-                            <Image RenderOptions.BitmapScalingMode="Fant" Height="50" Source="/Views/WebuntisLOGO.png"/>
+                            <Image RenderOptions.BitmapScalingMode="Fant" Height="40" Source="/Views/WebuntisLOGO.png"/>
                             <StackPanel Margin="10" VerticalAlignment="Center">
-                                <Label Padding="0" FontSize="16" FontFamily="/Fonts/#Cascadia Mono">WebUntis - Desktop</Label>
-                                <Label Padding="0" Opacity="0.6" FontSize="11" FontFamily="/Fonts/#Cascadia Mono">LBS Brixen Ch.J.Tschuggmall</Label>
+                                <Label Padding="0" FontSize="14" FontFamily="/Fonts/#Cascadia Mono">WebUntis - Desktop</Label>
+                                <Label Padding="0" Opacity="0.6" FontSize="8" FontFamily="/Fonts/#Cascadia Mono">LBS Brixen Ch.J.Tschuggmall</Label>
                             </StackPanel>
                         </StackPanel>
                         <Rectangle Cursor="SizeAll" Fill="Transparent" x:Name="UI_GrabPlane" MouseMove="OnWindowDrag"/>
@@ -68,7 +68,7 @@
                                     <Grid Margin="0">
                                         <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Stretch">
                                             <Image RenderOptions.BitmapScalingMode="Fant" Margin="5 0 15 0" Width="25" Height="25" Source="{Binding Path=Image}"/>
-                                            <Label x:Name="Name" FontSize="16" FontFamily="/Fonts/#Cascadia Mono" Content="{Binding Path=Name}"/>
+                                            <Label x:Name="Name" FontSize="14" FontFamily="/Fonts/#Cascadia Mono" Content="{Binding Path=Name}"/>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -79,7 +79,7 @@
                         </ListView>
                     </Grid>
                     
-                    <Grid Grid.Row="2" Margin="10 20 100 10">
+                    <Grid Grid.Row="2" Margin="10 20 10 10">
                         <StackPanel>
                             <StackPanel Margin="5" Orientation="Horizontal">
                                 <Image x:Name="UI_ProfilePicture" RenderOptions.BitmapScalingMode="Fant" Margin="0" Source="/Views/GpoRzNrlEBb2Pw3Of9pwneaDyA0MvKXq.jpg"  Height="60" Width="60" >
@@ -93,14 +93,14 @@
                                 </Image>
 
                                 <StackPanel Margin="10" VerticalAlignment="Center">
-                                    <Label x:Name="UI_UserName" FontFamily="/Fonts/#Cascadia Mono" FontSize="19" Padding="0" Foreground="#FF484848" >Name</Label>
-                                    <Label x:Name="UI_UserStatus" FontFamily="/Fonts/#Cascadia Mono" FontSize="12" Padding="0" Foreground="#FF848484" >Schüler</Label>
+                                    <Label x:Name="UI_UserName" FontFamily="/Fonts/#Cascadia Mono" FontSize="14" Padding="0" Foreground="#FF484848" >Name</Label>
+                                    <Label x:Name="UI_UserStatus" FontFamily="/Fonts/#Cascadia Mono" FontSize="11" Padding="0" Foreground="#FF848484" >Schüler</Label>
                                 </StackPanel>
                             </StackPanel>
 
                             <StackPanel Cursor="Hand" Margin="26 0 0 10" HorizontalAlignment="Stretch" Orientation="Horizontal">
                                 <Image RenderOptions.BitmapScalingMode="Fant" Height="25" Source="/Views/Logout.png"></Image>
-                                <Label FontSize="12" FontFamily="/Fonts/#Cascadia Mono" Margin="19 0 0 0">Abmelden</Label>
+                                <Label FontSize="14" FontFamily="/Fonts/#Cascadia Mono" Margin="19 0 0 0">Abmelden</Label>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
