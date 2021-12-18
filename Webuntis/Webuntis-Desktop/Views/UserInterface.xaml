@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Webuntis_Desktop.Views"
+        xmlns:local="clr-namespace:Webuntis_Desktop.Views" 
         mc:Ignorable="d"
-        Title="UserInterface" Height="720" MinHeight="450" Width="1080" MinWidth="800" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen">
+        Title="UserInterface" Height="720" MinHeight="450" Width="1300" MinWidth="810" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" KeyDown="OnKeyDown">
     <Grid>
         <Rectangle Fill="#F6F7F9" RadiusX="5" RadiusY="5"/>
 
@@ -98,7 +98,7 @@
                                 </StackPanel>
                             </StackPanel>
 
-                            <StackPanel Cursor="Hand" Margin="26 0 0 10" HorizontalAlignment="Stretch" Orientation="Horizontal">
+                            <StackPanel Cursor="Hand" Margin="26 0 0 10" HorizontalAlignment="Stretch" Orientation="Horizontal" MouseUp="LogoutButtonClicked">
                                 <Image RenderOptions.BitmapScalingMode="Fant" Height="25" Source="/Views/Logout.png"></Image>
                                 <Label FontSize="14" FontFamily="/Fonts/#Cascadia Mono" Margin="19 0 0 0">Abmelden</Label>
                             </StackPanel>

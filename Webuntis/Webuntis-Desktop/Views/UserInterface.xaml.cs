@@ -23,6 +23,9 @@ namespace Webuntis_Desktop.Views
     /// </summary>
     public partial class UserInterface : Window
     {
+        public delegate void OnLogoutEventHandler();
+        public event OnLogoutEventHandler OnLogout;
+
         WebuntisClient client;
 
         public UserInterface(WebuntisClient client)
@@ -40,8 +43,8 @@ namespace Webuntis_Desktop.Views
 
 
             UI_ModuleListView.Items.Add(new Module("Übersicht", "Ressources/Uebersicht.png", new Overview()));
-            UI_ModuleListView.Items.Add(new Module("Mein Stundenplan" , "Ressources/Stundenplan.png"));
-            UI_ModuleListView.Items.Add(new Module("Abwesenheiten", "Ressources/Abwesenheiten.png"));
+            //UI_ModuleListView.Items.Add(new Module("Mein Stundenplan" , "Ressources/Stundenplan.png"));
+            //UI_ModuleListView.Items.Add(new Module("Abwesenheiten", "Ressources/Abwesenheiten.png"));
             UI_ModuleListView.Items.Add(new Module("Noten", "Ressources/Noten.png", new Votes()));
 
             UI_ModuleListView.SelectedIndex = 0;
@@ -84,10 +87,23 @@ namespace Webuntis_Desktop.Views
             Dispatcher.Invoke(() =>
             {
                 var selectedModule = (Module)UI_ModuleListView.SelectedItem;
-                selectedModule!.module.OnFinishedLoading -= OnFinishedLoading;
+
+                selectedModule.module.OnFinishedLoading -= OnFinishedLoading;
                 UI_ModuleListView.IsEnabled = true;
             });
         }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+
+        }
+
+        private void LogoutButtonClicked(object sender, MouseButtonEventArgs e) => OnLogout?.Invoke();
+ 
     }
 
 

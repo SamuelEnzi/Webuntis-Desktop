@@ -10,8 +10,11 @@
 
   <ItemGroup>
     <None Remove="Ressources\Abwesenheiten.png" />
+    <None Remove="Ressources\ClassRegEntryIcon.png" />
+    <None Remove="Ressources\Grades.png" />
     <None Remove="Ressources\Heute.png" />
     <None Remove="Ressources\Noten.png" />
+    <None Remove="Ressources\OpenAbsences.png" />
     <None Remove="Ressources\Stundenplan.png" />
     <None Remove="Ressources\Uebersicht.png" />
     <None Remove="Views\close.png" />
@@ -34,10 +37,19 @@
     <Resource Include="Ressources\Abwesenheiten.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Ressources\ClassRegEntryIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\Grades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Ressources\Heute.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Ressources\Noten.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\OpenAbsences.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Ressources\Stundenplan.png">

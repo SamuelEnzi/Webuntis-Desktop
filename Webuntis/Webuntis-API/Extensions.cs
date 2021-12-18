@@ -58,6 +58,11 @@ namespace Webuntis_API
         public static Models.AbsenceInfo.Root GetAbsences(this Models.UserInfo.Root userInfo, WebuntisClient c, Models.AbsenceInfo.Status status) => c.GetAbsences(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start.DateToShorDate(), userInfo.currentSchoolYear.dateRange.end.DateToShorDate(), status);
         
         public static Models.ClassRegEventsInfo.Root GetClassRegEvents(this Models.UserInfo.Root userInfo, WebuntisClient c) => c.GetClassRegEvents(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start, userInfo.currentSchoolYear.dateRange.end);
+        
+        public static Models.GradeListInfo.Root GetGaradeList(this Models.UserInfo.Root userInfo, WebuntisClient c, string StartDate, string EndDate) => c.GetGradeList(userInfo.user.person.id, StartDate, EndDate);
+        
+        public static string DateTimeToString(this DateTime time) => $"{time.Year}{time.Month}{time.Day}";
+        
         public static string TimeDiff(this int startDate, int endDate)
         {
             if (startDate.ToString() == null || endDate.ToString() == null) return "";
@@ -75,7 +80,7 @@ namespace Webuntis_API
 
             return $"{hours}h {min}m";
         }
-
+        
         public static Tuple<int, int> ParseTimeTuple (this string timeString)
         {
             if(timeString.Length == 4)
@@ -96,9 +101,25 @@ namespace Webuntis_API
             return null;
         }
 
-        /// <summary>
-        /// 20220616
-        /// </summary>
         public static string DateToShorDate(this string date) => Regex.Replace(date, "[-]", string.Empty);
+
+        public static string ParseDate(this string ShortDate)
+        {
+            string year = ShortDate.Substring(0, 4);
+            string month = ShortDate.Substring(4, 2);
+            string day = ShortDate.Substring(6, 2);
+
+            return $"{year}-{month}-{day}";
+        }
+
+        public static string ParseDate(this int ShortDateInt)
+        {
+            string ShortDate = ShortDateInt.ToString();
+            string year = ShortDate.Substring(0, 4);
+            string month = ShortDate.Substring(4, 2);
+            string day = ShortDate.Substring(6, 2);
+
+            return $"{year}-{month}-{day}";
+        }
     }
 }

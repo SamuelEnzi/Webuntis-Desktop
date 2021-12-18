@@ -7,30 +7,31 @@
       xmlns:webui="clr-namespace:Webuntis_Desktop.UserControls"
       mc:Ignorable="d" 
       Title="Overview">
-    <Page.Resources>
-        <ResourceDictionary>
-            <DataTemplate x:Key="ClassBookEntryDataTemplate" x:Name="ClassBookEntryDataTemplate">
-                <ListView>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="0">
-                                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                                    <Label x:Name="Name" FontSize="14" FontFamily="/Fonts/#Cascadia Mono" Content="TEST"/>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </DataTemplate>
-        </ResourceDictionary>
-
-        
-    </Page.Resources>
+ 
     <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <WrapPanel Margin="5">
+                <webui:WU_OverviewEntry 
+                    Margin="5" MaxCellWidth="250" 
+                    IconImageSource="/Ressources/ClassRegEntryIcon.png" 
+                    x:Name="UI_ClassBookEntry" Title="Klassenbucheinträge" 
+                    SubTitle="Aktueller Monat" Width="500" Height="400">
+                </webui:WU_OverviewEntry>
 
-        <webui:WU_OverviewEntry MaxCellWidth="250" IconImageSource="/Ressources/Noten.png" x:Name="UI_ClassBookEntry" Title="Klassenbucheinträge" SubTitle="Aktueller Monat" Width="500" Height="400">
+                <webui:WU_OverviewEntry 
+                    Margin="5" MaxCellWidth="250" 
+                    IconImageSource="/Ressources/OpenAbsences.png" 
+                    x:Name="UI_OpenAbsences" Title="Offene Abwesenheiten" 
+                    SubTitle="Schuljahr" Width="500" Height="400">
+                </webui:WU_OverviewEntry>
 
-        </webui:WU_OverviewEntry>
-
+                <webui:WU_OverviewEntry 
+                    Margin="5" MaxCellWidth="250" 
+                    IconImageSource="/Ressources/Grades.png" 
+                    x:Name="UI_Grades" Title="Noten" 
+                    SubTitle="Letzten 7 Tage" Width="500" Height="400">
+                </webui:WU_OverviewEntry>
+            </WrapPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

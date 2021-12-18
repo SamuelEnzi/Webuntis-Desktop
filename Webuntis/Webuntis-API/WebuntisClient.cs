@@ -166,6 +166,21 @@ namespace Webuntis_API
         }
 
         /// <summary>
+        /// get grades in time range
+        /// </summary>
+        /// <param name="personID"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public Models.GradeListInfo.Root GetGradeList(int personID, string startDate, string endDate)
+        {
+            var url = webuntisBase.GetGradeListEndpoint(personID, startDate, endDate);
+            var info = client.DownloadString(url);
+
+            return info.Deserialize<Models.GradeListInfo.Root>();
+        }
+
+        /// <summary>
         /// Load ClassRegEvents
         /// </summary>
         /// <param name="personID"></param>
