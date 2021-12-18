@@ -29,5 +29,10 @@ namespace Webuntis_Desktop.Modules
             this.Lable.Content = $"Overview:: {client.Secret.Username}";
             return this;
         }
+
+        public void Render()
+        {
+            
+        }
     }
 }

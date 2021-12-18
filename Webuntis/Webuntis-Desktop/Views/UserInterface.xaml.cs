@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Webuntis_Desktop.Models;
 using Webuntis_Desktop.Modules;
 using Webuntis_API;
+using System.Threading;
 
 namespace Webuntis_Desktop.Views
 {
@@ -68,6 +69,7 @@ namespace Webuntis_Desktop.Views
             }
 
             UI_ModuleFrame.Content = (Page)selectedModule.module.Display(client);
+            new Thread(() => selectedModule.module.Render()).Start();
         }
     }
 

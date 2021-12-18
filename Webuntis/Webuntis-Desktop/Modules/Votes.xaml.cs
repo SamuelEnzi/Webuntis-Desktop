@@ -27,13 +27,20 @@ namespace Webuntis_Desktop.Modules
         public object Display(WebuntisClient client)
         {
             this.client = client;
+            return this;
+        }
+
+        public void Render()
+        {
 
             Webuntis_API.Models.UserInfo.Root user = client.GetUserInfo();
             Webuntis_API.Models.LessonInfo.Root lessons = user.GetLessons(client);
             List<Webuntis_Desktop.Models.SubjectGradesModel> subjects = new List<SubjectGradesModel>();
 
-
-            UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Fach" });
+            Dispatcher.Invoke(() =>
+            {
+                UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Fach" });
+            });
 
             lessons.data.lessons.ForEach(x =>
             {
@@ -47,27 +54,30 @@ namespace Webuntis_Desktop.Modules
 
             for (int i = 0; i < subjects.Max(x => x.Noten.Count) || i < 8; i++)
             {
-                UI_votesOutput.Columns.Add(new DataGridTextColumn());
+                Dispatcher.Invoke(() =>
+                {
+                    UI_votesOutput.Columns.Add(new DataGridTextColumn());
+                });
             }
 
-            UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Durchschnitt" });
-            UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "zum erreichen benötigt" });
-            UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Zielnote" });
-
+            Dispatcher.Invoke(() =>
+            {
+                UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Durchschnitt" });
+                UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "zum erreichen benötigt" });
+                UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Zielnote" });
+            });
             //UI_votesOutput.ItemsSource = subjects;
             //UI_votesOutput.Items.Add(subjects.Noten);
 
             subjects.ForEach(x =>
             {
-                List<object> subject = new List<object> { x.Fach, x.Durchschnitt, x.reachTarget, x.Zielnote};
+                List<object> subject = new List<object> { x.Fach, x.Durchschnitt, x.reachTarget, x.Zielnote };
                 subject.AddRange(x.Noten.Cast<object>());
-                UI_votesOutput.Items.Add(subject);
+                Dispatcher.Invoke(() =>
+                {
+                    UI_votesOutput.Items.Add(subject);
+                });
             });
-
-
-
-
-            return this;
         }
     }
 }
