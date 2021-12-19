@@ -41,10 +41,9 @@ namespace Webuntis_Desktop.Views
 
             UI_ProfilePicture.Source = Helpers.WebWorker.ImageFromUrl(userData.user.person.imageUrl);
 
-
             UI_ModuleListView.Items.Add(new Module("Übersicht", "Ressources/Uebersicht.png", new Overview()));
             UI_ModuleListView.Items.Add(new Module("Mein Stundenplan", "Ressources/Stundenplan.png", new TimeTable()));
-            //UI_ModuleListView.Items.Add(new Module("Abwesenheiten", "Ressources/Abwesenheiten.png"));
+            UI_ModuleListView.Items.Add(new Module("Abwesenheiten", "Ressources/Abwesenheiten.png", new Absences()));
             UI_ModuleListView.Items.Add(new Module("Noten", "Ressources/Noten.png", new Votes()));
 
             UI_ModuleListView.SelectedIndex = 0;

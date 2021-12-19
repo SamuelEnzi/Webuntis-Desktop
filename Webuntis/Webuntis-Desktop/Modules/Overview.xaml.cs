@@ -132,7 +132,7 @@ namespace Webuntis_Desktop.Modules
         public AbsenceEntry(string From, string To, string Status)
         {
             this.From = $"vom: {From}   ";
-            this.To = $" zu: {To}   ";
+            this.To = $" bis: {To}   ";
             this.Status = $" status: {Status}    ";
         }
     }

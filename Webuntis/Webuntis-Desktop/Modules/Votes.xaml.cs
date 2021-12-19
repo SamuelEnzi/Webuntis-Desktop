@@ -22,10 +22,10 @@ namespace Webuntis_Desktop.Modules
     /// </summary>
     public partial class Votes : Page, IModule
     {
-        WebuntisClient client;
+        public event IModule.OnFinishedLoadingEventHandler? OnFinishedLoading;
+        WebuntisClient? client;
         public Votes() => InitializeComponent();
 
-        public event IModule.OnFinishedLoadingEventHandler OnFinishedLoading;
 
         public object Display(WebuntisClient client)
         {

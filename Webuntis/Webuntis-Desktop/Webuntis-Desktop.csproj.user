@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Modules\Absences.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Modules\Overview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -33,6 +36,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Modules\Absences.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Modules\Overview.xaml">
       <SubType>Designer</SubType>
     </Page>

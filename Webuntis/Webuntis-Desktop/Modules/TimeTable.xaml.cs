@@ -23,8 +23,8 @@ namespace Webuntis_Desktop.Modules
     /// </summary>
     public partial class TimeTable : Page, IModule
     {
-        public event IModule.OnFinishedLoadingEventHandler OnFinishedLoading;
-        WebuntisClient client;
+        public event IModule.OnFinishedLoadingEventHandler? OnFinishedLoading;
+        WebuntisClient? client;
 
         private Webuntis_API.Models.LessonInfo.Root? lessonInfo = null;
         private Webuntis_API.Models.UserInfo.Root? userInfo = null;
