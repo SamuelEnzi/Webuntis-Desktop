@@ -26,6 +26,9 @@ namespace Webuntis_Desktop.Views
         public delegate void OnLogoutEventHandler();
         public event OnLogoutEventHandler OnLogout;
 
+        public delegate void OnReLoginEventHandler();
+        public event OnReLoginEventHandler OnRelogin;
+
         WebuntisClient client;
 
         public UserInterface(WebuntisClient client)
@@ -47,19 +50,6 @@ namespace Webuntis_Desktop.Views
             UI_ModuleListView.Items.Add(new Module("Noten", "Ressources/Noten.png", new Votes()));
 
             UI_ModuleListView.SelectedIndex = 0;
-
-            new Thread(() =>
-            {
-                while (true)
-                {
-                    try
-                    {
-                        client.HeartBeat();
-                    }
-                    catch { }
-                    Thread.Sleep(300000);
-                }
-            }).Start();
         }
 
         private void OnCloseClicked(object sender, MouseButtonEventArgs e) => Environment.Exit(0);
@@ -76,6 +66,15 @@ namespace Webuntis_Desktop.Views
         private void OnModuleSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (UI_ModuleListView.SelectedItem == null) return;
+            bool success = client.HeartBeat();
+
+            if (!success)
+            {
+                OnRelogin?.Invoke();
+                return;
+                
+            }
+
 
             UI_ProcessBar.Visibility = Visibility.Visible;
             UI_ModuleListView.IsEnabled = false;

@@ -56,15 +56,12 @@ namespace Webuntis_Desktop
                 {
                     Views.UserInterface? ui = new Views.UserInterface(WebuntisClient!);
 
-                    WebuntisClient!.OnSessionTimeout += (Ex) =>
+                    ui.OnRelogin += () =>
                     {
-                        Dispatcher.Invoke(() =>
-                        {
-                            ui.Close();
-                            ui = null;
-                            UserSecret = null;
-                            WebuntisClient = null;
-                        });
+                        ui.Close();
+                        ui = null;
+                        UserSecret = null;
+                        WebuntisClient = null;
                     };
 
                     ui.OnLogout += () =>

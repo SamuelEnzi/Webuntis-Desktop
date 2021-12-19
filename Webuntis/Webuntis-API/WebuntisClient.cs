@@ -271,7 +271,27 @@ namespace Webuntis_API
             //return info.Deserialize<dynamic>();
         }
 
-        public void HeartBeat()
+        /// <summary>
+        /// syncronous heartbeat
+        /// </summary>
+        public bool HeartBeat()
+        {
+            try
+            {
+                var res = this.GetUserInfo();
+                if(res != null)
+                    return true;
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// asnycronous heart beat
+        /// </summary>
+        public void HeartBeatAsync()
         {
             new Thread(() =>
             {
