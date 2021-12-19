@@ -51,9 +51,21 @@ namespace Webuntis_Desktop
                     Environment.Exit(0);
                 }
 
+             
                 try
                 {
                     Views.UserInterface? ui = new Views.UserInterface(WebuntisClient!);
+
+                    WebuntisClient!.OnSessionTimeout += (Ex) =>
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            ui.Close();
+                            ui = null;
+                            UserSecret = null;
+                            WebuntisClient = null;
+                        });
+                    };
 
                     ui.OnLogout += () =>
                     {
@@ -74,5 +86,6 @@ namespace Webuntis_Desktop
                 }
             }
         }
+
     }
 }

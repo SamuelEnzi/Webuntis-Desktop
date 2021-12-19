@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Webuntis_API
 {
     public class WebuntisClient : IDisposable
     {
+        public delegate void OnSessionTimeoutEventHandler(Exception e);
+        public event OnSessionTimeoutEventHandler OnSessionTimeout;
+
+        public delegate void OnHeartBeatEventHandler(bool success);
+        public event OnHeartBeatEventHandler OnHeartBeat;
+
         private WebuntisBase webuntisBase = new WebuntisBase();
 
         public WebClient client = new WebClient();
@@ -116,10 +123,18 @@ namespace Webuntis_API
         /// <returns></returns>
         public Models.UserInfo.Root GetUserInfo()
         {
-            var requestURl = webuntisBase.GetUserInfoEndpoint();
-            var userInfo = client.DownloadString(requestURl);
+            try
+            {
+                var requestURl = webuntisBase.GetUserInfoEndpoint();
+                var userInfo = client.DownloadString(requestURl);
 
-            return userInfo.Deserialize<Models.UserInfo.Root>();
+                return userInfo.Deserialize<Models.UserInfo.Root>();
+            }
+            catch (WebException Exception) 
+            {
+                OnSessionTimeout?.Invoke(Exception);
+                return null;
+            }
         }
 
         /// <summary>
@@ -130,10 +145,18 @@ namespace Webuntis_API
         /// <returns></returns>
         public Models.LessonInfo.Root GetLessons(int personID, int schoolyearID = 7)
         {
-            var url = webuntisBase.GetLessonsEndpoint(personID, schoolyearID);
-            var LessionInfo = client.DownloadString(url);
+            try
+            {
+                var url = webuntisBase.GetLessonsEndpoint(personID, schoolyearID);
+                var LessionInfo = client.DownloadString(url);
 
-            return LessionInfo.Deserialize<Models.LessonInfo.Root>();
+                return LessionInfo.Deserialize<Models.LessonInfo.Root>();
+            }
+            catch (WebException Exception)
+            {
+                OnSessionTimeout?.Invoke(Exception);
+                return null;
+            }
         }
 
         /// <summary>
@@ -144,10 +167,18 @@ namespace Webuntis_API
         /// <returns></returns>
         public Models.GradeInfo.Root GetGrades(int personID, int lessionID)
         {
-            var url = webuntisBase.GetGradeInfoEndpoint(personID, lessionID);
-            var GradesInfo = client.DownloadString(url);
+            try
+            {
+                var url = webuntisBase.GetGradeInfoEndpoint(personID, lessionID);
+                var GradesInfo = client.DownloadString(url);
 
-            return GradesInfo.Deserialize<Models.GradeInfo.Root>();
+                return GradesInfo.Deserialize<Models.GradeInfo.Root>();
+            }
+            catch (WebException Exception)
+            {
+                OnSessionTimeout?.Invoke(Exception);
+                return null;
+            }
         }
 
         /// <summary>
@@ -159,10 +190,18 @@ namespace Webuntis_API
         /// <returns></returns>
         public Models.AbsenceInfo.Root GetAbsences(int personID, string startDate, string endDate, Models.AbsenceInfo.Status status)
         {
-            var url = webuntisBase.GetAbsenceEndpoint(personID, startDate, endDate, status);
-            var info = client.DownloadString(url);
+            try
+            {
+                var url = webuntisBase.GetAbsenceEndpoint(personID, startDate, endDate, status);
+                var info = client.DownloadString(url);
 
-            return info.Deserialize<Models.AbsenceInfo.Root>();
+                return info.Deserialize<Models.AbsenceInfo.Root>();
+            }
+            catch (WebException Exception)
+            {
+                OnSessionTimeout?.Invoke(Exception);
+                return null;
+            }
         }
 
         /// <summary>
@@ -174,10 +213,18 @@ namespace Webuntis_API
         /// <returns></returns>
         public Models.GradeListInfo.Root GetGradeList(int personID, string startDate, string endDate)
         {
-            var url = webuntisBase.GetGradeListEndpoint(personID, startDate, endDate);
-            var info = client.DownloadString(url);
+            try
+            {
+                var url = webuntisBase.GetGradeListEndpoint(personID, startDate, endDate);
+                var info = client.DownloadString(url);
 
-            return info.Deserialize<Models.GradeListInfo.Root>();
+                return info.Deserialize<Models.GradeListInfo.Root>();
+            }
+            catch (WebException Exception)
+            {
+                OnSessionTimeout?.Invoke(Exception);
+                return null;
+            }
         }
 
         /// <summary>
@@ -189,10 +236,18 @@ namespace Webuntis_API
         /// <returns></returns>
         public Models.ClassRegEventsInfo.Root GetClassRegEvents(int personID, string startDate, string endDate)
         {
-            var url = webuntisBase.GetClassRegEventsEndpoint(personID, startDate, endDate);
-            var info = client.DownloadString(url);
+            try
+            {
+                var url = webuntisBase.GetClassRegEventsEndpoint(personID, startDate, endDate);
+                var info = client.DownloadString(url);
 
-            return info.Deserialize<Models.ClassRegEventsInfo.Root>();
+                return info.Deserialize<Models.ClassRegEventsInfo.Root>();
+            }
+            catch (WebException Exception)
+            {
+                OnSessionTimeout?.Invoke(Exception);
+                return null;
+            }
         }
 
         /// <summary>
@@ -203,10 +258,34 @@ namespace Webuntis_API
         /// <returns></returns>
         public string GetTimeTableInfo(int personID, string startOfWeekDate)
         {
-            var url = webuntisBase.GetTimeTableInfoEndpoint(personID, startOfWeekDate);
-            return client.DownloadString(url);
-
+            try
+            {
+                var url = webuntisBase.GetTimeTableInfoEndpoint(personID, startOfWeekDate);
+                return client.DownloadString(url);
+            }
+            catch (WebException Exception)
+            {
+                OnSessionTimeout?.Invoke(Exception);
+                return null;
+            }
             //return info.Deserialize<dynamic>();
+        }
+
+        public void HeartBeat()
+        {
+            new Thread(() =>
+            {
+                try
+                {
+                    using (WebuntisClient client = new WebuntisClient(this.Secret))
+                    {
+                        client.client.Headers = this.client.Headers;
+                        client.GetUserInfo();
+                        OnHeartBeat?.Invoke(true);
+                    }
+                }
+                catch { OnHeartBeat?.Invoke(false); }
+            }).Start();
         }
 
         /// <summary>

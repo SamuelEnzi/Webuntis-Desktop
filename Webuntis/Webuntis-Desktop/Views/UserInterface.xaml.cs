@@ -47,6 +47,19 @@ namespace Webuntis_Desktop.Views
             UI_ModuleListView.Items.Add(new Module("Noten", "Ressources/Noten.png", new Votes()));
 
             UI_ModuleListView.SelectedIndex = 0;
+
+            new Thread(() =>
+            {
+                while (true)
+                {
+                    try
+                    {
+                        client.HeartBeat();
+                    }
+                    catch { }
+                    Thread.Sleep(300000);
+                }
+            }).Start();
         }
 
         private void OnCloseClicked(object sender, MouseButtonEventArgs e) => Environment.Exit(0);
@@ -75,10 +88,21 @@ namespace Webuntis_Desktop.Views
                 return;
             }
 
-            selectedModule.module.OnFinishedLoading += OnFinishedLoading;
+            try
+            {
+                selectedModule.module.OnFinishedLoading += OnFinishedLoading;
+                UI_ModuleFrame.Content = (Page)selectedModule.module.Display(client);
+                new Thread(() => 
+                {
+                    try
+                    {
+                        selectedModule.module.Render();
+                    }
+                    catch { }
+                }).Start();
+            }
+            catch { }
 
-            UI_ModuleFrame.Content = (Page)selectedModule.module.Display(client);
-            new Thread(() => selectedModule.module.Render()).Start();
         }
 
         private void OnFinishedLoading(object sender)
