@@ -29,7 +29,7 @@
                     Margin="5" MaxCellWidth="250" 
                     IconImageSource="/Ressources/Grades.png" 
                     x:Name="UI_Grades" Title="Noten" 
-                    SubTitle="Letzten 7 Tage" Width="500" Height="400">
+                    SubTitle="Letzten 14 Tage" Width="500" Height="400">
                 </webui:WU_OverviewEntry>
             </WrapPanel>
         </ScrollViewer>

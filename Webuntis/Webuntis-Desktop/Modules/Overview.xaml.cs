@@ -81,7 +81,7 @@ namespace Webuntis_Desktop.Modules
 
             if(gradeInfo == null)
             {
-                DateTime start = DateTime.Now.AddDays(-(int)DateTime.Today.DayOfWeek);
+                DateTime start = DateTime.Now.AddDays(-32);
                 DateTime end = DateTime.Now;
 
                 gradeInfo = userInfo.GetGaradeList(client, start.DateTimeToString(), end.DateTimeToString());
@@ -89,8 +89,10 @@ namespace Webuntis_Desktop.Modules
 
                 gradeInfo.data.ForEach((x) =>
                 {
-                    gradeEntry.Add(new GradeEntry(x.subject, x.grade.examType.name, x.grade.exam.name, x.grade.mark.markDisplayValue.ToString()));
+                    gradeEntry.Add(new GradeEntry(x.grade.date, x.subject, x.grade.examType.name, x.grade.exam != null ? x.grade.exam.name : "", x.grade.mark.markDisplayValue.ToString()));
                 });
+
+                gradeEntry = (from entry in gradeEntry orderby entry.date descending select entry).ToList();
             }
 
             Dispatcher.Invoke(() => 
@@ -109,8 +111,10 @@ namespace Webuntis_Desktop.Modules
         public string Name { get; set; }
         public string Grade { get; set; }
 
-        public GradeEntry(string Subject, string Type, string Name, string Grade)
+        public int date;
+        public GradeEntry(int date, string Subject, string Type, string Name, string Grade)
         {
+            this.date = date;
             this.Subject = $"{Subject}"; 
             this.Type = $"    {Type}"; 
             this.Name = $"    {Name}"; 

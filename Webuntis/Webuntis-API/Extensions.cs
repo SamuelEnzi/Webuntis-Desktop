@@ -60,8 +60,8 @@ namespace Webuntis_API
         public static Models.ClassRegEventsInfo.Root GetClassRegEvents(this Models.UserInfo.Root userInfo, WebuntisClient c) => c.GetClassRegEvents(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start, userInfo.currentSchoolYear.dateRange.end);
         
         public static Models.GradeListInfo.Root GetGaradeList(this Models.UserInfo.Root userInfo, WebuntisClient c, string StartDate, string EndDate) => c.GetGradeList(userInfo.user.person.id, StartDate, EndDate);
-        
-        public static string DateTimeToString(this DateTime time) => $"{time.Year}{time.Month}{time.Day}";
+
+        public static string DateTimeToString(this DateTime time) => time.ToString("yyyyMMdd");
         
         public static string TimeDiff(this int startDate, int endDate)
         {
