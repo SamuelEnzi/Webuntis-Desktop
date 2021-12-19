@@ -28,24 +28,12 @@ namespace Webuntis_Desktop.Modules
 
         private Webuntis_API.Models.LessonInfo.Root? lessonInfo = null;
         private Webuntis_API.Models.UserInfo.Root? userInfo = null;
-
-        public TimeTable()
-        {
-            InitializeComponent();            
-        }
-
+        public TimeTable() => InitializeComponent();
         public object Display(WebuntisClient client)
         {
             this.client = client;
-
-
-            
-
-
-
             return this;
         }
-
         public void Render()
         {
             if (userInfo == null)
@@ -65,11 +53,8 @@ namespace Webuntis_Desktop.Modules
 
             Webuntis_API.Models.TimeTableInfo.Root[] TimeTableInfo = token!.ToString().Deserialize<Webuntis_API.Models.TimeTableInfo.Root[]>();
 
-
             var Days = TimeTableInfo.ToList();
-
             var GroupedDays = from TimeTable in TimeTableInfo group TimeTable by TimeTable.date;
-
 
             int i = 0;
             Redraw();
@@ -113,14 +98,6 @@ namespace Webuntis_Desktop.Modules
                 }
                 i++;
             }
-
-
-
-
-            // (Webuntis_API.Models.TimeTableInfo.Root[])(timeTableInfo.data.result.data.elementPeriods[id]);
-
-            //List<Webuntis_API.Models.TimeTableInfo.Root> TimeTableInfo = (List<Webuntis_API.Models.TimeTableInfo.Root>)(timeTableInfo.data.result.data.elementPeriods[id]);
-            //MessageBox.Show((string)[0].lessonId);
 
             OnFinishedLoading?.Invoke(this);
         }
@@ -230,6 +207,5 @@ namespace Webuntis_Desktop.Modules
             Background.Children.Add(Container);
             return Background;
         }
-
     }
 }
