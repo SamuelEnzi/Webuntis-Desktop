@@ -111,7 +111,6 @@ namespace Webuntis_Desktop.Modules
 
         public GradeEntry(string Subject, string Type, string Name, string Grade)
         {
-            //$"    {}";
             this.Subject = $"{Subject}"; 
             this.Type = $"    {Type}"; 
             this.Name = $"    {Name}"; 

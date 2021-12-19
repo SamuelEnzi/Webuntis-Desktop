@@ -165,7 +165,7 @@ namespace Webuntis_Desktop.Modules
             Background.Margin = new Thickness(5, 5, 5, 0);
 
             Grid Container = new Grid();
-            Container.Margin = new Thickness(5);
+            Container.Margin = new Thickness(0, 5, 5, 5);
             Container.Height = 55;
 
             Container.RowDefinitions.Add(new RowDefinition());
