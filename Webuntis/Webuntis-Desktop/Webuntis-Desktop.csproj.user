@@ -10,6 +10,9 @@
     <Compile Update="Modules\Overview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Modules\TimeTable.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Modules\Votes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,6 +34,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Modules\Overview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\TimeTable.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Votes.xaml">

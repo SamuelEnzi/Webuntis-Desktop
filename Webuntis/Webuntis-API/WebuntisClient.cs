@@ -196,6 +196,20 @@ namespace Webuntis_API
         }
 
         /// <summary>
+        /// get time table as string object
+        /// </summary>
+        /// <param name="personID"></param>
+        /// <param name="startOfWeekDate"></param>
+        /// <returns></returns>
+        public string GetTimeTableInfo(int personID, string startOfWeekDate)
+        {
+            var url = webuntisBase.GetTimeTableInfoEndpoint(personID, startOfWeekDate);
+            return client.DownloadString(url);
+
+            //return info.Deserialize<dynamic>();
+        }
+
+        /// <summary>
         /// add a header to requests
         /// </summary>
         /// <param name="key"></param>

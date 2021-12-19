@@ -19,5 +19,6 @@ namespace Webuntis_API
         public string GetAbsenceEndpoint(int personID,string startDate, string endDate, Models.AbsenceInfo.Status status) => $"{BaseURL}/WebUntis/api/classreg/absences/students?studentId={personID}&startDate={startDate}&endDate={endDate}&excuseStatusId={(int)status}&includeTodaysAbsence=true";
         public string GetClassRegEventsEndpoint(int personID, string startDate, string endDate) => $"{BaseURL}/WebUntis/api/classreg/classregevents?startDate={startDate.DateToShorDate()}&endDate={endDate.DateToShorDate()}&studentId={personID}";
         public string GetGradeListEndpoint(int personID, string startDate, string endDate) => $"{BaseURL}/WebUntis/api/classreg/grade/gradeList?personId={personID}&startDate={startDate}&endDate={endDate}";
+        public string GetTimeTableInfoEndpoint(int personID, string weekStartDate) => $"{BaseURL}/WebUntis/api/public/timetable/weekly/data?elementType=5&elementId={personID}&date={weekStartDate}&formatId=0";
     }
 }
