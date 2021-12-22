@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,10 +41,8 @@ namespace Webuntis_Desktop.Modules
             Webuntis_API.Models.LessonInfo.Root lessons = user.GetLessons(client);
             List<Webuntis_Desktop.Models.SubjectGradesModel> subjects = new List<SubjectGradesModel>();
 
-            Dispatcher.Invoke(() =>
-            {
-                UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Fach" });
-            });
+            DataTable data = new DataTable();
+            data.Columns.Add("Fach");
 
             lessons.data.lessons.ForEach(x =>
             {
@@ -55,32 +54,108 @@ namespace Webuntis_Desktop.Modules
                 });
             });
 
-            for (int i = 0; i < subjects.Max(x => x.Noten.Count) || i < 8; i++)
+            int columnCount = Math.Max(subjects.Max(x => x.Noten.Count), 8);
+            for (int i = 0; i < columnCount; i++)
             {
-                Dispatcher.Invoke(() =>
-                {
-                    UI_votesOutput.Columns.Add(new DataGridTextColumn());
-                });
+                DataColumn column = new DataColumn();
+                column.ColumnName = i.ToString();
+
+                data.Columns.Add(column);
             }
 
-            Dispatcher.Invoke(() =>
-            {
-                UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Durchschnitt" });
-                UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "zum erreichen benötigt" });
-                UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Zielnote" });
-            });
-            //UI_votesOutput.ItemsSource = subjects;
-            //UI_votesOutput.Items.Add(subjects.Noten);
+            data.Columns.Add("Durchschnitt");
+            data.Columns.Add("Gerundet");
+            //data.Columns.Add("reachTarget");
+            //data.Columns.Add("Zielnote");
 
             subjects.ForEach(x =>
             {
-                List<object> subject = new List<object> { x.Fach, x.Durchschnitt, x.reachTarget, x.Zielnote };
+                List<object> subject = new List<object> { x.Fach };
                 subject.AddRange(x.Noten.Cast<object>());
-                Dispatcher.Invoke(() =>
-                {
-                    UI_votesOutput.Items.Add(subject);
-                });
+                if (subject.Count < columnCount + 1)
+                    subject.AddRange(new string[columnCount - (subject.Count - 1)]);
+                subject.Add(x.Durchschnitt);
+                subject.Add(x.Gerundet);
+                //subject.Add(x.reachTarget);
+                //subject.Add(x.Zielnote);
+
+                DataRow dr = data.NewRow();
+                dr.ItemArray = subject.ToArray();
+
+                data.Rows.Add(dr);
             });
+
+
+            Dispatcher.Invoke(() =>
+            {
+                UI_votesOutput.ItemsSource = data.DefaultView;
+            });
+
+
+
+            //Dispatcher.Invoke(() =>
+            //{
+            //    UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Fach" });
+            //});
+
+            //lessons.data.lessons.ForEach(x =>
+            //{
+            //    SubjectGradesModel subject = new SubjectGradesModel(x.subjects, 6);
+            //    subjects.Add(subject);
+            //    x.GetGrades(user, client).data.grades.ForEach(x =>
+            //    {
+            //        subject.AddMark(x.mark.markDisplayValue);
+            //    });
+            //});
+
+            //for (int i = 0; i < subjects.Max(x => x.Noten.Count) || i < 8; i++)
+            //{
+            //    Dispatcher.Invoke(() =>
+            //    {
+            //        UI_votesOutput.Columns.Add(new DataGridTextColumn());
+            //    });
+            //}
+
+            //Dispatcher.Invoke(() =>
+            //{
+            //    UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Durchschnitt" });
+            //    UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "zum erreichen benötigt" });
+            //    UI_votesOutput.Columns.Add(new DataGridTextColumn() { Header = "Zielnote" });
+            //});
+
+            ////subjects.ForEach(x =>
+            ////{
+            ////    List<object> subject = new List<object> { x.Fach };
+            ////    subject.AddRange(x.Noten.Cast<object>());
+            ////    subject.Add(x.Durchschnitt);
+            ////    subject.Add(x.reachTarget);
+            ////    subject.Add(x.Zielnote);
+
+            ////    Dispatcher.Invoke(() =>
+            ////    {
+            ////        UI_votesOutput.Items.Add(subject.ToArray());
+            ////    });
+            ////});
+
+            //List<object> finalList = new List<object>();
+            //subjects.ForEach(x =>
+            //{
+            //    List<object> subject = new List<object> { x.Fach };
+            //    subject.AddRange(x.Noten.Cast<object>());
+            //    subject.Add(x.Durchschnitt);
+            //    subject.Add(x.reachTarget);
+            //    subject.Add(x.Zielnote);
+
+            //    finalList.AddRange(subject);
+            //});
+
+
+
+            //Dispatcher.Invoke(() =>
+            //{
+            //    UI_votesOutput.ItemsSource = finalList;
+            //});
+
 
             OnFinishedLoading?.Invoke(this);
         }
