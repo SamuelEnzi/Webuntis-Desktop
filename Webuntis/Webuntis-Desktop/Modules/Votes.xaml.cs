@@ -61,9 +61,9 @@ namespace Webuntis_Desktop.Modules
             data.Columns.Add("Durchschnitt");
             data.Columns.Add("Gerundet");
 
-            subjects.ForEach(x =>
+            subjects.Where(x => x.Noten.Count > 0).ToList().ForEach(x =>
             {
-                List<object> subject = new List<object> { x.Fach };
+                List<object> subject = new List<object> { x.Fach! };
                 subject.AddRange(x.Noten.Cast<object>());
                 if (subject.Count < columnCount + 1)
                     subject.AddRange(new string[columnCount - (subject.Count - 1)]);
