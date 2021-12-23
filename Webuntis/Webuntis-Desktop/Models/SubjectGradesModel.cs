@@ -8,7 +8,7 @@ namespace Webuntis_Desktop.Models
 {
     internal class SubjectGradesModel
     {
-        public String Fach { get; set; }
+        public string? Fach { get; set; }
         public List<double> Noten { get; set; } = new List<double>();
         public double Durchschnitt { get => Math.Round(Noten.Sum() / Noten.Count, 2); }
         public double Gerundet { get => Math.Round(Durchschnitt); }
@@ -23,9 +23,6 @@ namespace Webuntis_Desktop.Models
             this.Zielnote = target;
         }
 
-        public void AddMark(double mark)
-        {
-            Noten.Add(mark);
-        }
+        public void AddMark(double mark) =>Noten.Add(mark);
     }
 }

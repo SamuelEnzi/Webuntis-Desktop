@@ -5,10 +5,25 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Webuntis_Desktop.Modules"
       mc:Ignorable="d" 
-      
+      FontFamily="/Fonts/#Cascadia Mono"
       Title="Votes">
 
     <Grid>
-        <DataGrid x:Name="UI_votesOutput" Background="{x:Null}"/>
+        <DataGrid SelectionMode="Single" ColumnWidth="*" IsReadOnly="True" Padding="5" FontSize="13" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" HeadersVisibility="All" VerticalGridLinesBrush="Transparent" x:Name="UI_votesOutput" Background="{x:Null}" BorderBrush="{x:Null}">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="20"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Border Padding="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
     </Grid>
 </Page>
