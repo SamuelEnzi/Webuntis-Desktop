@@ -64,7 +64,7 @@ namespace Webuntis_Desktop.Modules
             subjects.Where(x => x.Noten.Count > 0).ToList().ForEach(x =>
             {
                 List<object> subject = new List<object> { x.Fach! };
-                subject.AddRange(x.Noten.Cast<object>());
+                subject.AddRange(x.Noten.Where(x=> x > 3).ToList().Cast<object>());
                 if (subject.Count < columnCount + 1)
                     subject.AddRange(new string[columnCount - (subject.Count - 1)]);
                 subject.Add(x.Durchschnitt);
