@@ -51,15 +51,15 @@ namespace Webuntis_API
 
         public static string Serialize(this object o) => JsonConvert.SerializeObject(o);
 
-        public static Models.GradeInfo.Root GetGrades(this Models.LessonInfo.Lesson lession, Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetGrades(userinfo.user.person.id, lession.id);
+        public static Models.GradeInfo.Root GetGrades(this Models.LessonInfo.Lesson lession, Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetGrades(userinfo.ToID(), lession.id);
 
-        public static Models.LessonInfo.Root GetLessons(this Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetLessons(userinfo.user.person.id, userinfo.currentSchoolYear.id);
+        public static Models.LessonInfo.Root GetLessons(this Models.UserInfo.Root userinfo, WebuntisClient c) => c.GetLessons(userinfo.ToID(), userinfo.currentSchoolYear.id);
 
-        public static Models.AbsenceInfo.Root GetAbsences(this Models.UserInfo.Root userInfo, WebuntisClient c, Models.AbsenceInfo.Status status) => c.GetAbsences(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start.DateToShorDate(), userInfo.currentSchoolYear.dateRange.end.DateToShorDate(), status);
+        public static Models.AbsenceInfo.Root GetAbsences(this Models.UserInfo.Root userInfo, WebuntisClient c, Models.AbsenceInfo.Status status) => c.GetAbsences(userInfo.ToID(), userInfo.currentSchoolYear.dateRange.start.DateToShorDate(), userInfo.currentSchoolYear.dateRange.end.DateToShorDate(), status);
         
-        public static Models.ClassRegEventsInfo.Root GetClassRegEvents(this Models.UserInfo.Root userInfo, WebuntisClient c) => c.GetClassRegEvents(userInfo.user.person.id, userInfo.currentSchoolYear.dateRange.start, userInfo.currentSchoolYear.dateRange.end);
+        public static Models.ClassRegEventsInfo.Root GetClassRegEvents(this Models.UserInfo.Root userInfo, WebuntisClient c) => c.GetClassRegEvents(userInfo.ToID(), userInfo.currentSchoolYear.dateRange.start, userInfo.currentSchoolYear.dateRange.end);
         
-        public static Models.GradeListInfo.Root GetGaradeList(this Models.UserInfo.Root userInfo, WebuntisClient c, string StartDate, string EndDate) => c.GetGradeList(userInfo.user.person.id, StartDate, EndDate);
+        public static Models.GradeListInfo.Root GetGaradeList(this Models.UserInfo.Root userInfo, WebuntisClient c, string StartDate, string EndDate) => c.GetGradeList(userInfo.ToID(), StartDate, EndDate);
 
         public static string DateTimeToString(this DateTime time) => time.ToString("yyyyMMdd");
         
@@ -126,6 +126,28 @@ namespace Webuntis_API
         {
             int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
             return dt.AddDays(-1 * diff).Date;
+        }
+    
+        public static int ToID(this Models.UserInfo.Root userInfo)
+        {
+            if(userInfo.user.person.id != -1)
+                return userInfo.user.person.id;
+
+            if (userInfo.user.students.Count > 0)
+                return userInfo.user.students[0].id;
+
+            return -1;
+        }
+
+        public static string ToName(this Models.UserInfo.Root userInfo)
+        {
+            if (userInfo.user.person.displayName.Trim() != "")
+                return userInfo.user.person.displayName;
+
+            if (userInfo.user.students.Count > 0)
+                return userInfo.user.students[0].displayName;
+
+            return "";
         }
     }
 }

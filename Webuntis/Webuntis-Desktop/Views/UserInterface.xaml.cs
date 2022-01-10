@@ -39,7 +39,7 @@ namespace Webuntis_Desktop.Views
 
             var userData = client.GetUserInfo();
 
-            UI_UserName.Content = userData.user.person.displayName;
+            UI_UserName.Content = userData.ToName();
             UI_UserStatus.Content = userData.user.roles.Aggregate((x, y) => x + ", " + y);
 
             UI_ProfilePicture.Source = Helpers.WebWorker.ImageFromUrl(userData.user.person.imageUrl);

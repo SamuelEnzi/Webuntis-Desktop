@@ -42,11 +42,11 @@ namespace Webuntis_Desktop.Modules
             if (lessonInfo == null)
                 lessonInfo = userInfo.GetLessons(client);
 
-            string id = userInfo.user.person.id.ToString();
+            string id = userInfo.ToID().ToString();
             var monday = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
             string name = $"{monday.Year}-{monday.Month}-{monday.Day}";
 
-            var timeTableInfo = client.GetTimeTableInfo(userInfo.user.person.id, name);
+            var timeTableInfo = client.GetTimeTableInfo(userInfo.ToID(), name);
 
             var parsed = JObject.Parse(timeTableInfo);
             var token = parsed["data"]["result"]["data"]["elementPeriods"][id];

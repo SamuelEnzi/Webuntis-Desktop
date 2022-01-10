@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Webuntis-Desktop"
-#define MyAppVersion "1.5"
+#define MyAppVersion "1.6"
 #define MyAppPublisher "L8 Studios"
 #define MyAppExeName "Webuntis-Desktop.exe"
 
@@ -20,7 +20,7 @@ DisableProgramGroupPage=yes
 PrivilegesRequired=lowest
 OutputDir=E:\development\Webuntis-Desktop\Webuntis\installer
 OutputBaseFilename=Webuntis-Desktop-Installer
-SetupIconFile=C:\Users\Manamana\Desktop\favicon.ico
+SetupIconFile=E:\development\Webuntis-Desktop\Webuntis\installer\favicon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern

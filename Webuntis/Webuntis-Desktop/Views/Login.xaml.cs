@@ -22,9 +22,19 @@ namespace Webuntis_Desktop.Views
     {
         public Secret? userSecret = null;
         public WebuntisClient? client = null;
-        public Login()
+
+        private Webuntis_API.Models.LoginInfo.Root? LastLoginInfo = null;
+
+        private string invalidCreds = "Invalid user name and/or password";
+        private string userBlocked = "Account blocked";
+
+        public Login(Webuntis_API.Models.LoginInfo.Root? LastLoginInfo)
         {
-              InitializeComponent();
+            InitializeComponent();
+            this.LastLoginInfo = LastLoginInfo;
+
+            UI_StatusLable.Content = LastLoginInfo?.loginError != null ? LastLoginInfo.loginError : "";        
+            UI_StatusLable.Visibility = Visibility.Visible;
         }
 
         private void OnCloseClicked(object sender, MouseButtonEventArgs e) => Environment.Exit(0);
@@ -37,11 +47,17 @@ namespace Webuntis_Desktop.Views
 
             if (!client.TryOpen())
             {
+                UI_StatusLable.Content = invalidCreds;
+                if (client.UserBlocked)
+                    UI_StatusLable.Content = userBlocked;
+                    
                 UI_StatusLable.Visibility = Visibility.Visible;
                 client.Dispose();
                 client = null;
                 return;
             }
+
+
 
             this.Close();
         }

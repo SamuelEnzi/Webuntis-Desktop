@@ -13,6 +13,13 @@ namespace Webuntis_API.Models.UserInfo
         public int id { get; set; }
     }
 
+    public class Student
+    {
+        public string displayName { get; set; }
+        public string imageUrl { get; set; }
+        public int id { get; set; }
+    }
+
     public class Permissions
     {
         public List<string> views { get; set; }
@@ -25,7 +32,7 @@ namespace Webuntis_API.Models.UserInfo
         public string locale { get; set; }
         public List<string> roles { get; set; }
         public Person person { get; set; }
-        public List<object> students { get; set; }
+        public List<Student> students { get; set; }
         public Permissions permissions { get; set; }
     }
 

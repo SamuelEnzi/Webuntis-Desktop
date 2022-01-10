@@ -14,6 +14,7 @@ namespace Webuntis_Desktop
 
         private Secret? UserSecret = null;
         private WebuntisClient? WebuntisClient = null;
+        private Webuntis_API.Models.LoginInfo.Root? LastLoginInfo = null;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -29,14 +30,17 @@ namespace Webuntis_Desktop
                     WebuntisClient = new WebuntisClient(UserSecret);
                     if (!WebuntisClient!.TryOpen())
                     {
-                        WebuntisClient.Dispose();
+                        LastLoginInfo = WebuntisClient.LoginInfo;
+                        UserSecret = null;
                         WebuntisClient = null;
+                        File.Delete(filename!);
+                        continue;
                     }
                 }
 
                 if (UserSecret == null)
                 {
-                    Views.Login login = new Views.Login();
+                    Views.Login login = new Views.Login(LastLoginInfo);
                     login.ShowDialog();
 
                     UserSecret = login.userSecret;
@@ -79,7 +83,7 @@ namespace Webuntis_Desktop
                 {
                     UserSecret = null;
                     WebuntisClient = null;
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.ToString());
                 }
             }
         }

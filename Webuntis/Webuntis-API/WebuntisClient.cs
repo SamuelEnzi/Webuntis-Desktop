@@ -21,6 +21,8 @@ namespace Webuntis_API
         public WebClient client = new WebClient();
         public SessionInfo sessionInfo { get; private set; } = new SessionInfo();
         public Secret Secret { get; private set; }
+        public bool UserBlocked { get; private set; } = false;
+        public Models.LoginInfo.Root LoginInfo { get; set; }
 
         public WebuntisClient(Secret secret)
         {
@@ -91,6 +93,14 @@ namespace Webuntis_API
             client.Headers.Add("Content-Type", $"application/x-www-form-urlencoded");
 
             var res = client.UploadString(secEndpoint, data);
+
+            LoginInfo = res.Deserialize<Models.LoginInfo.Root>();
+
+            if (res.Contains("blocked"))
+            {
+                UserBlocked = true;
+                return false;
+            }
 
             var rheaders = client.ResponseHeaders["Set-Cookie"];
             this.sessionInfo.Auth = rheaders.GetSetCookieContent("auth");
