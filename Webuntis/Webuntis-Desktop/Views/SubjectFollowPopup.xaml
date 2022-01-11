@@ -1,0 +1,26 @@
+﻿<Window x:Class="Webuntis_Desktop.Views.SubjectFollowPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Webuntis_Desktop.Views"
+        mc:Ignorable="d"
+        FontFamily="/Fonts/#Cascadia Mono"
+        Title="SubjectFollowPopup" MaxWidth="150" MaxHeight="150" Width="AUTO" Height="AUTO"  ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
+    <Grid>
+        <Rectangle x:Name="UI_Background" Margin="10" Fill="#CCCECFD1" RadiusX="5" RadiusY="5">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="10" 
+                           ShadowDepth="0" 
+                           Color="Black"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label HorizontalAlignment="Center" x:Name="UI_Subject"></Label>
+            <Label HorizontalAlignment="Center" x:Name="UI_Teacher"></Label>
+            <Label HorizontalAlignment="Center" x:Name="UI_StartTime"></Label>
+            <Label HorizontalAlignment="Center" x:Name="UI_EndTime"></Label>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" MaxWidth="200" TextAlignment="Center" x:Name="UI_Text"></TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>

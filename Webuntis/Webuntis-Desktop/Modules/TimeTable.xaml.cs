@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using Webuntis_API;
 using Webuntis_API.Models.TimeTableInfo;
 
+
+
 namespace Webuntis_Desktop.Modules
 {
     /// <summary>
@@ -23,21 +25,70 @@ namespace Webuntis_Desktop.Modules
     /// </summary>
     public partial class TimeTable : Page, IModule
     {
+        public delegate void OnLessionHoverEventHandler(int index);
+        public event OnLessionHoverEventHandler? OnLessionHover;
+
+        public delegate void OnLessionHoverEnterEventHandler(int index);
+        public event OnLessionHoverEnterEventHandler? OnLessionHoverEnter;
+
+        public delegate void OnLessionHoverExitEventHandler(int index);
+        public event OnLessionHoverExitEventHandler? OnLessionHoverExit;
+
         public event IModule.OnFinishedLoadingEventHandler? OnFinishedLoading;
         WebuntisClient? client;
 
         private Webuntis_API.Models.LessonInfo.Root? lessonInfo = null;
         private Webuntis_API.Models.UserInfo.Root? userInfo = null;
+
+        private List<SubjectModel> subjects = new List<SubjectModel>();
+        private Views.SubjectFollowPopup? SubjectFollowPopup;
+
+
         public TimeTable() => InitializeComponent();
         public object Display(WebuntisClient client)
         {
+            SubjectFollowPopup = new Views.SubjectFollowPopup();
+            SubjectFollowPopup.Show();
+            SubjectFollowPopup!.Visibility = Visibility.Hidden;
+
             this.client = client;
+            this.OnLessionHover += OnMouseOverLession;
+            this.OnLessionHoverEnter += OnMouseOverLessionEnter;
+            this.OnLessionHoverExit += OnMouseOverLessionExit;
             return this;
         }
+
+        private void OnMouseOverLessionExit(int index)
+        {
+            SubjectFollowPopup!.Visibility = Visibility.Hidden;
+        }
+
+        private void OnMouseOverLessionEnter(int index)
+        {
+            var current = subjects[index];
+            SubjectFollowPopup!.Set(current.TeacherName!, current.Subject!, current.StartTime!, current.EndTime!, current.Text! ,current.Color!);
+            SubjectFollowPopup!.Visibility = Visibility.Visible;
+        }
+
+        private void OnMouseOverLession(int index)
+        {
+            MoveBottomRightEdgeOfWindowToMousePosition();
+        }
+
+        Point GetMousePos() => this.PointToScreen(Mouse.GetPosition(this));
+
+        private void MoveBottomRightEdgeOfWindowToMousePosition()
+        {
+            var transform = PresentationSource.FromVisual(this).CompositionTarget.TransformFromDevice;
+            var mouse = transform.Transform(GetMousePos());
+            SubjectFollowPopup!.Left = mouse.X + 10;
+            SubjectFollowPopup!.Top = mouse.Y + 10;
+        }
+
         public void Render()
         {
             if (userInfo == null)
-                userInfo = client.GetUserInfo();
+                userInfo = client!.GetUserInfo();
 
             if (lessonInfo == null)
                 lessonInfo = userInfo.GetLessons(client);
@@ -46,10 +97,10 @@ namespace Webuntis_Desktop.Modules
             var monday = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
             string name = $"{monday.Year}-{monday.Month}-{monday.Day}";
 
-            var timeTableInfo = client.GetTimeTableInfo(userInfo.ToID(), name);
+            var timeTableInfo = client!.GetTimeTableInfo(userInfo.ToID(), name);
 
             var parsed = JObject.Parse(timeTableInfo);
-            var token = parsed["data"]["result"]["data"]["elementPeriods"][id];
+            var token = parsed["data"]?["result"]?["data"]?["elementPeriods"]?[id];
 
             Webuntis_API.Models.TimeTableInfo.Root[] TimeTableInfo = token!.ToString().Deserialize<Webuntis_API.Models.TimeTableInfo.Root[]>();
 
@@ -65,12 +116,13 @@ namespace Webuntis_Desktop.Modules
                     var Subject = "";
                     var Teacher = "";
                     var Class = "";
+                    List<Webuntis_API.Models.LessonInfo.Lesson> lsh = new List<Webuntis_API.Models.LessonInfo.Lesson>();
 
                     Brush color = Brushes.Orange;
 
                     foreach (var lession in hours)
                     {
-                        var lsh = lessonInfo.data.lessons.Where(x => x.id == lession.lessonId).ToList();
+                        lsh = lessonInfo.data.lessons.Where(x => x.id == lession.lessonId).ToList();
                         Subject += lsh[0].subjects + "/";
                         Teacher += lsh[0].teachers + "/";
                         Class += lsh[0].klassen + "/";
@@ -81,18 +133,35 @@ namespace Webuntis_Desktop.Modules
                             color = Brushes.Orange;
                         else if (lession.cellState == CellState.SUBSTITUTION.ToString())
                             color = Brushes.Red;
-                        
                     }
 
                     Subject = Subject.TrimEnd('/');
                     Teacher = Teacher.TrimEnd('/');
                     Class = Class.TrimEnd('/');
 
+                    string text = string.Empty;
+                    try
+                    {
+                        text = lsh[0].text;
+                    }
+                    catch { }
 
+                    var current = new SubjectModel()
+                    {
+                        Color = color,
+                        Text = text,
+                        Subject = Subject,
+                        TeacherName = Teacher,
+                        StartTime = hours.First().startTime.ToString(),
+                        EndTime = hours.First().endTime.ToString()
+                    };
+
+                    subjects.Add(current);
+                    var index = subjects.IndexOf(current);
 
                     Dispatcher.Invoke(()=> 
                     {
-                        var element = GenerateLession(Subject, Teacher, Class, color);
+                        var element = GenerateLession(Subject, Teacher, Class, color, index);
                         Insert(element, i);
                     });
                 }
@@ -122,6 +191,7 @@ namespace Webuntis_Desktop.Modules
 
         private void Redraw()
         {
+            subjects.Clear();
             Dispatcher.Invoke(() =>
             {
                 Monday.Children.Clear();
@@ -159,7 +229,7 @@ namespace Webuntis_Desktop.Modules
             return Container;
         }
 
-        public UIElement GenerateLession( string Subject, string TeacherName, string ClassName ,Brush backgroundColor)
+        public UIElement GenerateLession( string Subject, string TeacherName, string ClassName ,Brush backgroundColor, int hoverIndex = -1)
         {
             Grid Background = new Grid();
             Background.Margin = new Thickness(5, 5, 5, 0);
@@ -205,7 +275,39 @@ namespace Webuntis_Desktop.Modules
             Background.Children.Add(background);
 
             Background.Children.Add(Container);
+
+            Rectangle hoverRect = new Rectangle();
+            hoverRect.Fill = Brushes.Transparent;
+            Background.Children.Add(hoverRect);
+
+            hoverRect.MouseMove += (v, x) =>
+            {
+                OnLessionHover?.Invoke(hoverIndex);
+            };
+
+            hoverRect.MouseLeave += (v, x) =>
+            {
+                OnLessionHoverExit?.Invoke(hoverIndex);
+            };
+
+            hoverRect.MouseEnter += (v, y) =>
+            {
+                OnLessionHoverEnter?.Invoke(hoverIndex);
+            };
+
+
             return Background;
+        }
+
+        sealed private class SubjectModel
+        {
+            public string? Subject { get; set; }
+            public string? StartTime { get; set; }
+            public string? EndTime { get; set; }
+            public string? TeacherName { get; set; }
+            public string? Text { get; set; }
+            public Brush? Color { get; set; }
+            public override string ToString() => $"{Subject}, {TeacherName}, {StartTime}, {EndTime}";
         }
     }
 }
