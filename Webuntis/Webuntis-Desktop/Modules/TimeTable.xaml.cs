@@ -97,7 +97,7 @@ namespace Webuntis_Desktop.Modules
             var Days = TimeTableInfo.ToList();
             var GroupedDays = from TimeTable in TimeTableInfo group TimeTable by TimeTable.date;
 
-            int i = 0;
+          
             Redraw(monday);
             foreach (var days in GroupedDays.OrderBy(k => k.Key))
             {
@@ -160,10 +160,12 @@ namespace Webuntis_Desktop.Modules
                     Dispatcher.Invoke(()=> 
                     {
                         var element = GenerateLession(Subject, Teacher, Class, color, index);
+                        var date = hours.First().date;
+                        var i = GetLessionIndex(monday, date);
                         Insert(element, i);
                     });
                 }
-                i++;
+               
             }
 
             OnFinishedLoading?.Invoke(this);
@@ -181,6 +183,27 @@ namespace Webuntis_Desktop.Modules
                 if (now.Date.Day == day && now.Date.Month == month)
                     return true;
             return false;
+        }
+
+        private int GetLessionIndex(DateTime StartOfWeek, int date)
+        {
+            int mondey = int.Parse(StartOfWeek.ToString("yyyyMMdd"));
+            StartOfWeek = StartOfWeek.AddDays(1);
+            int tuesday = int.Parse(StartOfWeek.ToString("yyyyMMdd"));
+            StartOfWeek = StartOfWeek.AddDays(1);
+            int wednesday = int.Parse(StartOfWeek.ToString("yyyyMMdd"));
+            StartOfWeek = StartOfWeek.AddDays(1);
+            int thursday = int.Parse(StartOfWeek.ToString("yyyyMMdd"));
+            StartOfWeek = StartOfWeek.AddDays(1);
+            int friday = int.Parse(StartOfWeek.ToString("yyyyMMdd"));
+            StartOfWeek = StartOfWeek.AddDays(1);
+
+            if (date == mondey) return 0;
+            if (date == tuesday) return 1;
+            if (date == wednesday) return 2;
+            if (date == thursday) return 3;
+            if (date == friday) return 4;
+            return 0;
         }
 
         private void Insert(UIElement element, int day)
