@@ -68,6 +68,7 @@ namespace Webuntis_Desktop.Modules
                 absenceInfo = userInfo.GetAbsences(client, Webuntis_API.Models.AbsenceInfo.Status.All);
                 absenceEntry = new List<AbsenceEntry>();
 
+                absenceInfo.data.absences.Reverse();
                 absenceInfo.data.absences.ForEach((x) =>
                 {
                     absenceEntry.Add(new AbsenceEntry(x.startDate.ParseDate(), x.endDate.ParseDate(),x.excuse.excuseStatus));

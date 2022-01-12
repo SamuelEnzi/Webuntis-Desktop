@@ -6,21 +6,25 @@
         xmlns:local="clr-namespace:Webuntis_Desktop.Views"
         mc:Ignorable="d"
         FontFamily="/Fonts/#Cascadia Mono"
-        Title="SubjectFollowPopup" MaxWidth="150" MaxHeight="150" Width="AUTO" Height="AUTO"  ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
+        Title="SubjectFollowPopup" MaxWidth="170" Visibility="Collapsed" MaxHeight="180" Width="AUTO" Height="AUTO"  ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
     <Grid>
-        <Rectangle x:Name="UI_Background" Margin="10" Fill="#CCCECFD1" RadiusX="5" RadiusY="5">
-            <Rectangle.Effect>
-                <DropShadowEffect BlurRadius="10" 
+
+        <Rectangle x:Name="UI_Background" Margin="10" RadiusX="5" RadiusY="5">
+            
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="4" 
                            ShadowDepth="0" 
                            Color="Black"/>
-            </Rectangle.Effect>
+                </Rectangle.Effect>
+           
         </Rectangle>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        
+        <StackPanel Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label HorizontalAlignment="Center" x:Name="UI_Subject"></Label>
             <Label HorizontalAlignment="Center" x:Name="UI_Teacher"></Label>
             <Label HorizontalAlignment="Center" x:Name="UI_StartTime"></Label>
             <Label HorizontalAlignment="Center" x:Name="UI_EndTime"></Label>
-            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" MaxWidth="200" TextAlignment="Center" x:Name="UI_Text"></TextBlock>
+            <TextBlock Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"  TextAlignment="Center" x:Name="UI_Text"></TextBlock>
         </StackPanel>
     </Grid>
 </Window>

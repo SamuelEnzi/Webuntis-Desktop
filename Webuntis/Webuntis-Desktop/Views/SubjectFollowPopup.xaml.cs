@@ -32,9 +32,15 @@ namespace Webuntis_Desktop.Views
                 this.UI_Background.Opacity = 0.7;
                 this.UI_Subject.Content = Subject;
                 this.UI_Teacher.Content = Teacher;
-                this.UI_StartTime.Content = ToTime(StartTime);   
-                this.UI_EndTime.Content = ToTime(EndTime);
+                this.UI_StartTime.Content = $"von {ToTime(StartTime)}Uhr";   
+                this.UI_EndTime.Content = $"bis {ToTime(EndTime)}Uhr";
                 this.UI_Text.Text = Text;
+
+                if(Text != String.Empty)
+                    this.UI_Text.Visibility = Visibility.Visible;
+                else
+                    this.UI_Text.Visibility = Visibility.Collapsed;
+
             });
         }
 

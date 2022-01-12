@@ -142,7 +142,7 @@ namespace Webuntis_Desktop.Modules
                     string text = string.Empty;
                     try
                     {
-                        text = lsh[0].text;
+                        text = hours.First().lessonText;
                     }
                     catch { }
 
