@@ -176,7 +176,7 @@ namespace Webuntis_Desktop.Modules
             var now = DateTime.Now;
             int nowTime = int.Parse($"{now.ToString("hhmm").TrimStart('0')}");
 
-            if (nowTime > startTime && nowTime < endTime)
+            if (nowTime >= startTime && nowTime < endTime)
                 if(now.Date.Day == day && now.Date.Month == month)
                     return true;
             return false;
