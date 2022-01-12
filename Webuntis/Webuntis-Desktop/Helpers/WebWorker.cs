@@ -9,7 +9,7 @@ namespace Webuntis_Desktop.Helpers
 {
     public static class WebWorker
     {
-        public static BitmapImage ImageFromUrl(string url)
+        public static BitmapImage? ImageFromUrl(string url)
         {
             try
             {

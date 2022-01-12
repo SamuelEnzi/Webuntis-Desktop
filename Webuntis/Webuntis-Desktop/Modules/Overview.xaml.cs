@@ -21,10 +21,10 @@ namespace Webuntis_Desktop.Modules
     /// </summary>
     public partial class Overview : Page, IModule
     {
-        WebuntisClient client;
+        WebuntisClient? client;
         public Overview() => InitializeComponent();
 
-        public event IModule.OnFinishedLoadingEventHandler OnFinishedLoading;
+        public event IModule.OnFinishedLoadingEventHandler? OnFinishedLoading;
 
 
         private Webuntis_API.Models.UserInfo.Root? userInfo = null;
@@ -47,7 +47,7 @@ namespace Webuntis_Desktop.Modules
         public void Render()
         {
             if(userInfo == null)
-                userInfo = client.GetUserInfo();
+                userInfo = client!.GetUserInfo();
           
             if(classRegInfo == null)
                 classRegInfo = userInfo.GetClassRegEvents(client);
@@ -60,7 +60,7 @@ namespace Webuntis_Desktop.Modules
 
             Dispatcher.Invoke(() => 
             {
-                UI_ClassBookEntry.DataContent.ItemsSource = classBookEntry;
+                UI_ClassBookEntry.DataContent!.ItemsSource = classBookEntry;
             });
 
             if (absenceInfo == null)
@@ -77,7 +77,7 @@ namespace Webuntis_Desktop.Modules
 
             Dispatcher.Invoke(() =>
             {
-                UI_OpenAbsences.DataContent.ItemsSource = absenceEntry;
+                UI_OpenAbsences.DataContent!.ItemsSource = absenceEntry;
             });
 
             if(gradeInfo == null)
@@ -98,7 +98,7 @@ namespace Webuntis_Desktop.Modules
 
             Dispatcher.Invoke(() => 
             {
-                UI_Grades.DataContent.ItemsSource = gradeEntry;
+                UI_Grades.DataContent!.ItemsSource = gradeEntry;
             });
 
             OnFinishedLoading?.Invoke(this); 

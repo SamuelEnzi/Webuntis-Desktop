@@ -22,10 +22,10 @@ namespace Webuntis_Desktop.UserControls
   
     public partial class WU_OverviewEntry : UserControl
     {
-        public string Title { get; set; }
-        public string SubTitle { get; set; }
-        public ImageSource IconImageSource { get; set; }
-        public DataGrid DataContent { get => this.PDataContent; set => this.PDataContent = value; }
+        public string? Title { get; set; }
+        public string? SubTitle { get; set; }
+        public ImageSource? IconImageSource { get; set; }
+        public DataGrid? DataContent { get => this.PDataContent; set => this.PDataContent = value; }
         public int MaxCellWidth { get; set; } = 250;
         public WU_OverviewEntry()
         {
@@ -36,7 +36,7 @@ namespace Webuntis_Desktop.UserControls
         private void AutoGen(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             e.Column.MaxWidth = MaxCellWidth;
-            DataGridBoundColumn column = e.Column as DataGridBoundColumn;
+            DataGridBoundColumn? column = e.Column as DataGridBoundColumn;
             if (column != null)
             {
                 column.Binding = new Binding(e.PropertyName);

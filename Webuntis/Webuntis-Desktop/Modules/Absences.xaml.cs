@@ -86,11 +86,11 @@ namespace Webuntis_Desktop.Modules
 
             Dispatcher.Invoke(() =>
             {
-                selected = ToStatus(((ComboBoxItem)GetSelectedValue()).Content.ToString());
+                selected = ToStatus(((ComboBoxItem)GetSelectedValue()!).Content?.ToString()!);
             });
 
             absenceInfo = userInfo.GetAbsences(client, selected);
-
+            absenceInfo.data.absences.Reverse();
             absenceInfo.data.absences.ForEach(absence =>
             {
                 background = StateToColor(absence.isExcused);

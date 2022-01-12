@@ -24,12 +24,12 @@ namespace Webuntis_Desktop.Views
     public partial class UserInterface : Window
     {
         public delegate void OnLogoutEventHandler();
-        public event OnLogoutEventHandler OnLogout;
+        public event OnLogoutEventHandler? OnLogout;
 
         public delegate void OnReLoginEventHandler();
-        public event OnReLoginEventHandler OnRelogin;
+        public event OnReLoginEventHandler? OnRelogin;
 
-        WebuntisClient client;
+        WebuntisClient? client;
 
         public UserInterface(WebuntisClient client)
         {
@@ -66,7 +66,7 @@ namespace Webuntis_Desktop.Views
         private void OnModuleSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (UI_ModuleListView.SelectedItem == null) return;
-            bool success = client.HeartBeat();
+            bool success = client!.HeartBeat();
 
             if (!success)
             {
@@ -110,7 +110,7 @@ namespace Webuntis_Desktop.Views
             {
                 var selectedModule = (Module)UI_ModuleListView.SelectedItem;
 
-                selectedModule.module.OnFinishedLoading -= OnFinishedLoading;
+                selectedModule.module!.OnFinishedLoading -= OnFinishedLoading;
                 UI_ProcessBar.Visibility = Visibility.Hidden;
                 UI_ModuleListView.IsEnabled = true;
             });
