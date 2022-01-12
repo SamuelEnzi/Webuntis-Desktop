@@ -17,7 +17,7 @@
             </Style>
         </ResourceDictionary>
     </Page.Resources>
-    
+
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -32,5 +32,15 @@
         <StackPanel Grid.Column="2" x:Name="Wednesday"></StackPanel>
         <StackPanel Grid.Column="3" x:Name="Thursday"></StackPanel>
         <StackPanel Grid.Column="4" x:Name="Friday"></StackPanel>
+
+
+        <StackPanel  VerticalAlignment="Bottom" Grid.Column="4" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Image Cursor="Hand" Margin="5" RenderOptions.BitmapScalingMode="Fant" x:Name="UI_ButtonBack" Height="25" Source="/Modules/back.png" MouseUp="OnBackClicked" ></Image>
+            <Image Cursor="Hand" Margin="5" RenderOptions.BitmapScalingMode="Fant" x:Name="UI_ButtonReload" Height="25" Source="/Modules/reload.png" MouseUp="OnReloadClicked"></Image>
+            <Image Cursor="Hand" Margin="5" RenderOptions.BitmapScalingMode="Fant" x:Name="UI_ButtonNext" Height="25" Source="/Modules/next.png" MouseUp="OnNextClicked"></Image>
+        </StackPanel>
+        
+        
+
     </Grid>
 </Page>

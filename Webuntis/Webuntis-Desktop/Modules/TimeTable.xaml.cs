@@ -43,6 +43,7 @@ namespace Webuntis_Desktop.Modules
         private List<SubjectModel> subjects = new List<SubjectModel>();
         private Views.SubjectFollowPopup? SubjectFollowPopup;
 
+        private int WeeksAhead = 0;
 
         public TimeTable() => InitializeComponent();
         public object Display(WebuntisClient client)
@@ -83,7 +84,7 @@ namespace Webuntis_Desktop.Modules
                 lessonInfo = userInfo.GetLessons(client);
 
             string id = userInfo.ToID().ToString();
-            var monday = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+            var monday = DateTime.Now.AddDays(7*WeeksAhead).StartOfWeek(DayOfWeek.Monday);
             string name = $"{monday.Year}-{monday.Month}-{monday.Day}";
 
             var timeTableInfo = client!.GetTimeTableInfo(userInfo.ToID(), name);
@@ -116,7 +117,7 @@ namespace Webuntis_Desktop.Modules
                         Teacher += lsh[0].teachers + "/";
                         Class += lsh[0].klassen + "/";
 
-                        bool isCurrentDay = IsCurrentSubjectTime(hours.First().startTime, hours.First().endTime, hours.First().date);
+                        bool isCurrentDay = IsCurrentSubjectTime(hours.First().startTime, hours.First().endTime, hours.First().date, monday);
 
                         if (isCurrentDay)
                         {
@@ -168,16 +169,16 @@ namespace Webuntis_Desktop.Modules
             OnFinishedLoading?.Invoke(this);
         }
 
-        private bool IsCurrentSubjectTime(int startTime, int endTime, int GenDate)
+        private bool IsCurrentSubjectTime(int startTime, int endTime, int GenDate, DateTime currentDate)
         {
             string date = GenDate.ToString();
             int day = int.Parse(date.Substring(date.Length - 2));
             int month = int.Parse(date.Substring(date.Length - 4,2).TrimStart('0'));
             var now = DateTime.Now;
-            int nowTime = int.Parse($"{now.ToString("hhmm").TrimStart('0')}");
+            int nowTime = int.Parse($"{now.ToString("HHmm").TrimStart('0')}");
 
             if (nowTime >= startTime && nowTime < endTime)
-                if(now.Date.Day == day && now.Date.Month == month)
+                if (now.Date.Day == day && now.Date.Month == month)
                     return true;
             return false;
         }
@@ -312,6 +313,25 @@ namespace Webuntis_Desktop.Modules
             public string? Text { get; set; }
             public Brush? Color { get; set; }
             public override string ToString() => $"{Subject}, {TeacherName}, {StartTime}, {EndTime}";
+        }
+
+
+        private void OnBackClicked(object sender, MouseButtonEventArgs e)
+        {
+            this.WeeksAhead--;
+            Render();
+        }
+
+        private void OnReloadClicked(object sender, MouseButtonEventArgs e)
+        {
+            this.WeeksAhead = 0;
+            Render();
+        }
+
+        private void OnNextClicked(object sender, MouseButtonEventArgs e)
+        {
+            this.WeeksAhead++;
+            Render();
         }
     }
 }

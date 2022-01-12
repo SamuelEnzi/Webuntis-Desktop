@@ -38,6 +38,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Modules\back.png" />
+    <None Remove="Modules\next.png" />
+    <None Remove="Modules\reload.png" />
     <None Remove="Ressources\Abwesenheiten.png" />
     <None Remove="Ressources\ClassRegEntryIcon.png" />
     <None Remove="Ressources\Grades.png" />
@@ -67,6 +70,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Modules\back.png" />
+    <Resource Include="Modules\next.png" />
+    <Resource Include="Modules\reload.png" />
     <Resource Include="Ressources\Abwesenheiten.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
