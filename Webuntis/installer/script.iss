@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Webuntis-Desktop"
-#define MyAppVersion "1.8"
+#define MyAppVersion "1.8.1"
 #define MyAppPublisher "L8 Studios"
 #define MyAppExeName "Webuntis-Desktop.exe"
 
