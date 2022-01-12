@@ -29,7 +29,7 @@ namespace Webuntis_Desktop.Views
             Dispatcher.Invoke(() =>
             {
                 this.UI_Background.Fill = Color;
-                this.UI_Background.Opacity = 0.7;
+               
                 this.UI_Subject.Content = Subject;
                 this.UI_Teacher.Content = Teacher;
                 this.UI_StartTime.Content = $"von {ToTime(StartTime)}Uhr";   

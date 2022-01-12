@@ -58,25 +58,15 @@ namespace Webuntis_Desktop.Modules
             return this;
         }
 
-        private void OnMouseOverLessionExit(int index)
-        {
-            SubjectFollowPopup!.Visibility = Visibility.Hidden;
-        }
-
+        private void OnMouseOverLessionExit(int index) => SubjectFollowPopup!.Visibility = Visibility.Hidden;
+        private void OnMouseOverLession(int index) => MoveBottomRightEdgeOfWindowToMousePosition();
+        Point GetMousePos() => this.PointToScreen(Mouse.GetPosition(this));
         private void OnMouseOverLessionEnter(int index)
         {
             var current = subjects[index];
             SubjectFollowPopup!.Set(current.TeacherName!, current.Subject!, current.StartTime!, current.EndTime!, current.Text! ,current.Color!);
             SubjectFollowPopup!.Visibility = Visibility.Visible;
         }
-
-        private void OnMouseOverLession(int index)
-        {
-            MoveBottomRightEdgeOfWindowToMousePosition();
-        }
-
-        Point GetMousePos() => this.PointToScreen(Mouse.GetPosition(this));
-
         private void MoveBottomRightEdgeOfWindowToMousePosition()
         {
             var transform = PresentationSource.FromVisual(this).CompositionTarget.TransformFromDevice;
@@ -84,7 +74,6 @@ namespace Webuntis_Desktop.Modules
             SubjectFollowPopup!.Left = mouse.X + 10;
             SubjectFollowPopup!.Top = mouse.Y + 10;
         }
-
         public void Render()
         {
             if (userInfo == null)
@@ -108,7 +97,7 @@ namespace Webuntis_Desktop.Modules
             var GroupedDays = from TimeTable in TimeTableInfo group TimeTable by TimeTable.date;
 
             int i = 0;
-            Redraw();
+            Redraw(monday);
             foreach (var days in GroupedDays.OrderBy(k => k.Key))
             {
                 foreach(var hours in days.OrderBy(d => d.startTime).GroupBy(d=>d.startTime))
@@ -127,6 +116,14 @@ namespace Webuntis_Desktop.Modules
                         Teacher += lsh[0].teachers + "/";
                         Class += lsh[0].klassen + "/";
 
+                        bool isCurrentDay = IsCurrentSubjectTime(hours.First().startTime, hours.First().endTime, hours.First().date);
+
+                        if (isCurrentDay)
+                        {
+                            color = Brushes.LightBlue;
+                            continue;
+                        }
+
                         if (lession.cellState == CellState.EXAM.ToString())
                             color = Brushes.Yellow;
                         else if (lession.cellState == CellState.STANDARD.ToString())
@@ -138,7 +135,7 @@ namespace Webuntis_Desktop.Modules
                     Subject = Subject.TrimEnd('/');
                     Teacher = Teacher.TrimEnd('/');
                     Class = Class.TrimEnd('/');
-
+                    
                     string text = string.Empty;
                     try
                     {
@@ -171,6 +168,20 @@ namespace Webuntis_Desktop.Modules
             OnFinishedLoading?.Invoke(this);
         }
 
+        private bool IsCurrentSubjectTime(int startTime, int endTime, int GenDate)
+        {
+            string date = GenDate.ToString();
+            int day = int.Parse(date.Substring(date.Length - 2));
+            int month = int.Parse(date.Substring(date.Length - 4,2).TrimStart('0'));
+            var now = DateTime.Now;
+            int nowTime = int.Parse($"{now.ToString("hhmm").TrimStart('0')}");
+
+            if (nowTime > startTime && nowTime < endTime)
+                if(now.Date.Day == day && now.Date.Month == month)
+                    return true;
+            return false;
+        }
+
         private void Insert(UIElement element, int day)
         {
             if(day == 0)
@@ -189,7 +200,7 @@ namespace Webuntis_Desktop.Modules
                 Friday.Children.Add(element);
         }
 
-        private void Redraw()
+        private void Redraw(DateTime date)
         {
             subjects.Clear();
             Dispatcher.Invoke(() =>
@@ -200,11 +211,15 @@ namespace Webuntis_Desktop.Modules
                 Thursday.Children.Clear();
                 Friday.Children.Clear();
 
-                Monday.Children.Add(GenerateHeader("MO", Brushes.White));
-                Tuesday.Children.Add(GenerateHeader("DI", Brushes.White));
-                Wednesday.Children.Add(GenerateHeader("MI", Brushes.White));
-                Thursday.Children.Add(GenerateHeader("DO", Brushes.White));
-                Friday.Children.Add(GenerateHeader("FR", Brushes.White));
+                Monday.Children.Add(GenerateHeader($"MO {date.Date.Day}.{date.Date.Month}", Brushes.White));
+                date = date.AddDays(1);
+                Tuesday.Children.Add(GenerateHeader($"DI {date.Date.Day}.{date.Date.Month}", Brushes.White));
+                date = date.AddDays(1);
+                Wednesday.Children.Add(GenerateHeader($"MI {date.Date.Day}.{date.Date.Month}", Brushes.White));
+                date = date.AddDays(1);
+                Thursday.Children.Add(GenerateHeader($"DO {date.Date.Day}.{date.Date.Month}", Brushes.White));
+                date = date.AddDays(1);
+                Friday.Children.Add(GenerateHeader($"FR {date.Date.Day}.{date.Date.Month}", Brushes.White));
             });
         }
 
@@ -273,28 +288,17 @@ namespace Webuntis_Desktop.Modules
             background.Fill = backgroundColor;
             background.Opacity = 0.6;
             Background.Children.Add(background);
-
             Background.Children.Add(Container);
 
             Rectangle hoverRect = new Rectangle();
             hoverRect.Fill = Brushes.Transparent;
             Background.Children.Add(hoverRect);
 
-            hoverRect.MouseMove += (v, x) =>
-            {
-                OnLessionHover?.Invoke(hoverIndex);
-            };
+            if (hoverIndex == -1) return background;
 
-            hoverRect.MouseLeave += (v, x) =>
-            {
-                OnLessionHoverExit?.Invoke(hoverIndex);
-            };
-
-            hoverRect.MouseEnter += (v, y) =>
-            {
-                OnLessionHoverEnter?.Invoke(hoverIndex);
-            };
-
+            hoverRect.MouseMove += (v, x) => OnLessionHover?.Invoke(hoverIndex);
+            hoverRect.MouseLeave += (v, x) => OnLessionHoverExit?.Invoke(hoverIndex);
+            hoverRect.MouseEnter += (v, y) => OnLessionHoverEnter?.Invoke(hoverIndex);
 
             return Background;
         }
