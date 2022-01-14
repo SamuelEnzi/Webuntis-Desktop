@@ -126,7 +126,33 @@ namespace Webuntis_Desktop.Views
         }
 
         private void LogoutButtonClicked(object sender, MouseButtonEventArgs e) => OnLogout?.Invoke();
- 
+        private void OnWindowStateChangeButtonClicked(object sender, MouseButtonEventArgs e)
+        {
+            if (this.WindowState == WindowState.Normal)
+                this.WindowState = WindowState.Maximized;
+
+            else
+                this.WindowState = WindowState.Normal;
+
+            UpdateWindowStateIcon();
+        }
+
+        private string CreateIconUrl(string source) => 
+            string.Format(
+            "pack://application:,,,/{0};component/{1}"
+           , System.Reflection.Assembly.GetExecutingAssembly().GetName().Name
+           , source
+            );
+
+        private void UpdateWindowStateIcon()
+        {
+            if (this.WindowState == WindowState.Maximized)
+                UI_WindowStateButton.Source = new BitmapImage(new Uri(CreateIconUrl("Ressources/fullscreen-exit.png")));
+
+            else
+                UI_WindowStateButton.Source = new BitmapImage(new Uri(CreateIconUrl("Ressources/fullscreen.png")));
+        }
+        private void OnWindowStateChanged(object sender, EventArgs e) => UpdateWindowStateIcon();
     }
 
 

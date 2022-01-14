@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Webuntis_Desktop.Views" 
         mc:Ignorable="d"
-        Title="UserInterface" Height="720" MinHeight="450" Width="1300" MinWidth="810" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" KeyDown="OnKeyDown">
+        Title="UserInterface" Height="720" MinHeight="450" Width="1300" MinWidth="810" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" KeyDown="OnKeyDown" StateChanged="OnWindowStateChanged">
     <Grid>
         <Rectangle Fill="#F6F7F9" RadiusX="5" RadiusY="5"/>
 
@@ -114,6 +114,9 @@
                 </Frame>
             </Grid>
         </Grid>
-        <Image Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" RenderOptions.BitmapScalingMode="Fant" Cursor="Hand" Height="15" Source="/Views/close.png" MouseUp="OnCloseClicked"></Image>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Image x:Name="UI_WindowStateButton" Grid.Column="1"  Margin="10 10 0 10" RenderOptions.BitmapScalingMode="Fant" Cursor="Hand" Height="15" Source="/Views/fullscreen.png" MouseUp="OnWindowStateChangeButtonClicked"></Image>
+            <Image Grid.Column="1"  Margin="10 10 10 10" RenderOptions.BitmapScalingMode="Fant" Cursor="Hand" Height="15" Source="/Views/close.png" MouseUp="OnCloseClicked"></Image>
+        </StackPanel>
     </Grid>
 </Window>

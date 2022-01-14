@@ -43,6 +43,8 @@
     <None Remove="Modules\reload.png" />
     <None Remove="Ressources\Abwesenheiten.png" />
     <None Remove="Ressources\ClassRegEntryIcon.png" />
+    <None Remove="Ressources\fullscreen-exit.png" />
+    <None Remove="Ressources\fullscreen.png" />
     <None Remove="Ressources\Grades.png" />
     <None Remove="Ressources\Heute.png" />
     <None Remove="Ressources\Noten.png" />
@@ -50,6 +52,7 @@
     <None Remove="Ressources\Stundenplan.png" />
     <None Remove="Ressources\Uebersicht.png" />
     <None Remove="Views\close.png" />
+    <None Remove="Views\fullscreen.png" />
     <None Remove="Views\Logout.png" />
     <None Remove="Views\TschuggmalLogoF.png" />
     <None Remove="Views\WebuntisLOGO.png" />
@@ -79,6 +82,12 @@
     <Resource Include="Ressources\ClassRegEntryIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Ressources\fullscreen-exit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Ressources\fullscreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Ressources\Grades.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -98,6 +107,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\close.png" />
+    <Resource Include="Views\fullscreen.png" />
     <Resource Include="Views\Logout.png" />
     <Resource Include="Views\TschuggmalLogoF.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
