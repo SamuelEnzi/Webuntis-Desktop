@@ -113,9 +113,18 @@ namespace Webuntis_Desktop.Modules
                     foreach (var lession in hours)
                     {
                         lsh = lessonInfo.data.lessons.Where(x => x.id == lession.lessonId).ToList();
-                        Subject += lsh[0].subjects + "/";
-                        Teacher += lsh[0].teachers + "/";
-                        Class += lsh[0].klassen + "/";
+                        if(lsh.Count > 0)
+                        {
+                            Subject += lsh[0].subjects + "/";
+                            Teacher += lsh[0].teachers + "/";
+                            Class += lsh[0].klassen + "/";
+                        }
+                        else
+                        {
+                            Subject += "ANDERES";
+                            Teacher += "-";
+                            Class += "-";
+                        }
 
                         bool isCurrentDay = IsCurrentSubjectTime(hours.First().startTime, hours.First().endTime, hours.First().date, monday);
 
