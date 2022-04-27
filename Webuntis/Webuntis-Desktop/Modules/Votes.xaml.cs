@@ -50,7 +50,7 @@ namespace Webuntis_Desktop.Modules
                 x.GetGrades(user, client).data.grades.ForEach(x => subject.AddMark(x.mark.markDisplayValue));
             });
 
-            int columnCount = Math.Max(subjects.Max(x => x.Noten.Count), 8);
+            int columnCount = Math.Max(subjects.Max(x => x.Noten.Count), 9);
             for (int i = 0; i < columnCount; i++)
             {
                 DataColumn column = new DataColumn();
@@ -60,6 +60,7 @@ namespace Webuntis_Desktop.Modules
 
             data.Columns.Add("Durchschnitt");
             data.Columns.Add("Gerundet");
+            data.Columns.Add("Auf 6");
 
             subjects.Where(x => x.Noten.Count > 0).ToList().ForEach(x =>
             {
@@ -69,6 +70,12 @@ namespace Webuntis_Desktop.Modules
                     subject.AddRange(new string[columnCount - (subject.Count - 1)]);
                 subject.Add(x.Durchschnitt);
                 subject.Add(x.Gerundet);
+
+
+                var ZN = 6;
+                var CT = x.Noten.Where(x => x > 3).ToList().Count;
+                var SUM = x.Noten.Where(x => x > 3).Sum();
+                subject.Add(ZN * (CT + 1) - SUM);
 
                 DataRow dr = data.NewRow();
                 dr.ItemArray = subject.ToArray();
