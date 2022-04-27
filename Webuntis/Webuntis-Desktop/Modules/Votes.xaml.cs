@@ -70,12 +70,10 @@ namespace Webuntis_Desktop.Modules
                     subject.AddRange(new string[columnCount - (subject.Count - 1)]);
                 subject.Add(x.Durchschnitt);
                 subject.Add(x.Gerundet);
-
-
-                var ZN = 6;
-                var CT = x.Noten.Where(x => x > 3).ToList().Count;
-                var SUM = x.Noten.Where(x => x > 3).Sum();
-                subject.Add(ZN * (CT + 1) - SUM);
+                
+                string delimiter = "; ";
+                string markRequired = string.Join(delimiter,  MarksToTarget(x.Noten.Where(x => x > 3).ToList(), 6)).Trim().Trim(';');
+                subject.Add(markRequired);
 
                 DataRow dr = data.NewRow();
                 dr.ItemArray = subject.ToArray();
@@ -85,6 +83,26 @@ namespace Webuntis_Desktop.Modules
 
             Dispatcher.Invoke(() => UI_votesOutput.ItemsSource = data.DefaultView);
             OnFinishedLoading?.Invoke(this);
+        }
+
+        /// <summary>
+        /// created by ISAAC
+        /// </summary>
+        /// <param name="marks"></param>
+        /// <param name="targetMark"></param>
+        /// <returns></returns>
+        public IEnumerable<double?> MarksToTarget(List<double> marks, double targetMark)
+        {
+            do
+            {
+                var target = Math.Clamp((targetMark * (marks.Count + 1) - marks.Sum()), 4, 10);
+
+                if (target > 4)
+                    target = Math.Round(target * 4, 0) / 4;
+
+                yield return target;
+                marks.Add(target);
+            } while (marks.Average() != 6.0);
         }
     }
 }
