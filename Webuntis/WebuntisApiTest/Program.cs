@@ -91,18 +91,54 @@ namespace WebuntisApiTest
 
             var absences = UserInfo.GetAbsences(client, Webuntis_API.Models.AbsenceInfo.Status.All);
 
+            double hours = 0;
+            double mins = 0;
+
+            double hoursTotal = 0;
+            double minsTotal = 0;
+
             if (absences.data.absences.Count > 0)
             {
                 Console.ResetColor();
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Absenzen");
-
+                Console.ResetColor();
+                var last = "";
                 absences.data.absences.ForEach(absences =>
                 {
-                    Console.WriteLine($"reason: {absences.excuseStatus} => {absences.createdUser} FROM {absences.startDate} to {absences.endDate} :: {absences.startTime.TimeDiff(absences.endTime)}");
+                    string timeDiff =  absences.startTime.TimeDiff(absences.endTime);
+                    var timeDiffTuple =  absences.startTime.TimeDiffTuple(absences.endTime);
+                    Console.WriteLine($"reason: {absences.excuseStatus} => {absences.createdUser} FROM {absences.startDate} to {absences.endDate} :: {timeDiff}");
+                    last = timeDiff;
+                    try
+                    {
+                        if (absences.excuseStatus == "unentschuldigt" || absences.excuseStatus == "noch nicht entschuldigt")
+                        {
+                            hours += timeDiffTuple.Item1;
+                            mins += timeDiffTuple.Item2;
+                        }
+
+                        hoursTotal += timeDiffTuple.Item1;
+                        minsTotal += timeDiffTuple.Item2;
+                    }
+                    catch (Exception e) { Console.WriteLine($"{e.Message}: {last}"); }
                 });
             }
 
+            hours += mins / 60;
+            double hd = ((double)mins / 60.0);
+            mins = (int)((double)((double)hd - (int)hd) * 60.0);
+
+
+            hoursTotal += minsTotal / 60;
+            double hdTotal = ((double)minsTotal / 60.0);
+            minsTotal = (int)((double)((double)hdTotal - (int)hdTotal) * 60.0);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"insgesamte unentschuldigten fehlstunden: {(int)hours}h {(int)mins}m");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"insgesamte fehlstunden: {(int)hoursTotal}h {(int)minsTotal}m");
             Console.ReadKey();
         }
     }

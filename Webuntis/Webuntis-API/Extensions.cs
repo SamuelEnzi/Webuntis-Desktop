@@ -81,6 +81,24 @@ namespace Webuntis_API
             return $"{hours}h {min}m";
         }
         
+        public static Tuple<double,double> TimeDiffTuple(this int startDate, int endDate)
+        {
+            if (startDate.ToString() == null || endDate.ToString() == null) return new Tuple<double, double>(0, 0);
+
+            var start = startDate.ToString().ParseTimeTuple();
+            var end = endDate.ToString().ParseTimeTuple();
+
+            var startmin = start.Item2 + (start.Item1 * 60);
+            var endmin = end.Item2 + (end.Item1 * 60);
+
+            var diffMin = endmin - startmin;
+
+            var hours = (double)(diffMin / 60);
+            var min = (double)((double)((double)(diffMin / 60.0) - (double)hours) * 60.0);
+
+            return new Tuple<double, double>(hours, min);
+        }
+
         public static Tuple<int, int> ParseTimeTuple (this string timeString)
         {
             if(timeString.Length == 4)
