@@ -1,4 +1,6 @@
 @echo off
 cd Webuntis-Desktop
 dotnet publish -c Release -o ..\publish --runtime win-x64 --self-contained false
+cd..
+start %cd%\PackageManager\PackageCreator.exe %cd%\publish %cd%\PackageManager\Package\Package.zip
 exit
