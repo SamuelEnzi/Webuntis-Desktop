@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +25,8 @@ namespace Webuntis_Desktop.Modules
     /// </summary>
     public partial class Votes : Page, IModule
     {
+        private int targetMark = 6;
+
         public event IModule.OnFinishedLoadingEventHandler? OnFinishedLoading;
         WebuntisClient? client;
         public Votes() => InitializeComponent();
@@ -60,7 +64,10 @@ namespace Webuntis_Desktop.Modules
 
             data.Columns.Add("Durchschnitt");
             data.Columns.Add("Gerundet");
-            data.Columns.Add("Auf 6");
+            data.Columns.Add($"Auf {targetMark}");
+
+            double avr = 0;
+
 
             subjects.Where(x => x.Noten.Count > 0).ToList().ForEach(x =>
             {
@@ -72,15 +79,18 @@ namespace Webuntis_Desktop.Modules
                 subject.Add(x.Gerundet);
                 
                 string delimiter = "; ";
-                string markRequired = string.Join(delimiter,  MarksToTarget(x.Noten.Where(x => x > 3).ToList(), 6)).Trim().Trim(';');
+                string markRequired = string.Join(delimiter,  MarksToTarget(x.Noten.Where(x => x > 3).ToList(), targetMark)).Trim().Trim(';');
                 subject.Add(markRequired);
 
                 DataRow dr = data.NewRow();
                 dr.ItemArray = subject.ToArray();
-
+                avr += x.Noten.Where(x => x > 3).Average();
                 data.Rows.Add(dr);
             });
 
+            avr /= subjects.Where(x => x.Noten.Count > 0).ToList().Count;
+            avr = Math.Round(avr *4,0) /4;
+            Dispatcher.Invoke(() => UI_AvrLable.Content = $"Notendurchschnitt: {avr}");
             Dispatcher.Invoke(() => UI_votesOutput.ItemsSource = data.DefaultView);
             OnFinishedLoading?.Invoke(this);
         }
@@ -102,7 +112,27 @@ namespace Webuntis_Desktop.Modules
 
                 yield return target;
                 marks.Add(target);
-            } while (marks.Average() != 6.0);
+            } while (marks.Average() != 6.0 && marks.Count < 10);
         }
-    }
+
+        private void UI_TargetVoteInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (UI_TargetVoteInput.Text.Length <= 0 || UI_TargetVoteInput.Text == " ") return;
+            try 
+            {
+                int input = int.Parse(UI_TargetVoteInput.Text);
+                if (input == targetMark || input <= 3) return;
+                targetMark = input;
+
+                SharedEvents.RegisterLoadModule(this);
+            }
+            catch { }
+        }
+
+        private void Grid_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^4-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+    }   
 }

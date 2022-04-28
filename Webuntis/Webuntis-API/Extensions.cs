@@ -167,5 +167,12 @@ namespace Webuntis_API
 
             return "";
         }
+
+        public static string ToTimeString(this string value)
+        {
+            if (value.Length == 3)
+                return $"{value.Substring(0, 1)}:{value.Substring(1)}";
+            return $"{value.Substring(0, 2)}:{value.Substring(2)}";
+        }
     }
 }

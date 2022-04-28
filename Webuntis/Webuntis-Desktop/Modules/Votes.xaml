@@ -8,7 +8,7 @@
       FontFamily="/Fonts/#Cascadia Mono"
       Title="Votes">
 
-    <Grid>
+    <Grid PreviewTextInput="Grid_PreviewTextInput">
         <DataGrid SelectionMode="Single" ColumnWidth="*" IsReadOnly="True" Padding="5" FontSize="13" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" HeadersVisibility="All" VerticalGridLinesBrush="Transparent" x:Name="UI_votesOutput" Background="{x:Null}" BorderBrush="{x:Null}">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
@@ -25,5 +25,12 @@
                 </Style>
             </DataGrid.CellStyle>
         </DataGrid>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5" FontSize="14">Zielnote: </Label>
+                <TextBox x:Name="UI_TargetVoteInput" MaxLength="1" Padding="5" VerticalAlignment="Center"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" TextChanged="UI_TargetVoteInput_TextChanged">6</TextBox>
+            </StackPanel>
+            <Label x:Name="UI_AvrLable" Margin="5" FontSize="14"></Label>
+        </StackPanel>
     </Grid>
 </Page>

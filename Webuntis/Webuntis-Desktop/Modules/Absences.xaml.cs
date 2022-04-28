@@ -94,7 +94,7 @@ namespace Webuntis_Desktop.Modules
             absenceInfo.data.absences.ForEach(absence =>
             {
                 background = StateToColor(absence.isExcused);
-                var model = new AbsenceModel($"vom {absence.startDate.ParseDate()}", $"bis {absence.endDate.ParseDate()}", absence.excuseStatus, background, Brushes.White);
+                var model = new AbsenceModel($"vom {absence.startDate.ParseDate()} ({absence.startTime.ToString().ToTimeString()})", $"bis {absence.endDate.ParseDate()} ({absence.endTime.ToString().ToTimeString()})", absence.excuseStatus, background, Brushes.White);
                 result.Add(model);
             });
             return result;

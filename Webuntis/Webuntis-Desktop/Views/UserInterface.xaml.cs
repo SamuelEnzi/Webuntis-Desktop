@@ -50,6 +50,8 @@ namespace Webuntis_Desktop.Views
             UI_ModuleListView.Items.Add(new Module("Noten", "Ressources/Noten.png", new Votes()));
 
             UI_ModuleListView.SelectedIndex = 0;
+
+            SharedEvents.LoadModule += (module) => LoadModule(module);
         }
 
         private void OnCloseClicked(object sender, MouseButtonEventArgs e) => Environment.Exit(0);
@@ -72,14 +74,19 @@ namespace Webuntis_Desktop.Views
             {
                 OnRelogin?.Invoke();
                 return;
-                
             }
 
 
+            var selectedModule = (Module)UI_ModuleListView.SelectedItem;
+
+            LoadModule(selectedModule);
+        }
+
+        private void LoadModule(Module selectedModule)
+        {
             UI_ProcessBar.Visibility = Visibility.Visible;
             UI_ModuleListView.IsEnabled = false;
 
-            var selectedModule = (Module)UI_ModuleListView.SelectedItem;
 
             if (selectedModule.module == null)
             {
@@ -91,7 +98,7 @@ namespace Webuntis_Desktop.Views
             {
                 selectedModule.module.OnFinishedLoading += OnFinishedLoading;
                 UI_ModuleFrame.Content = (Page)selectedModule.module.Display(client);
-                new Thread(() => 
+                new Thread(() =>
                 {
                     try
                     {
@@ -101,8 +108,29 @@ namespace Webuntis_Desktop.Views
                 }).Start();
             }
             catch { }
-
         }
+
+        private void LoadModule(IModule selectedModule)
+        {
+            UI_ProcessBar.Visibility = Visibility.Visible;
+            UI_ModuleListView.IsEnabled = false;
+
+            try
+            {
+                selectedModule.OnFinishedLoading += OnFinishedLoading;
+                UI_ModuleFrame.Content = (Page)selectedModule.Display(client);
+                new Thread(() =>
+                {
+                    try
+                    {
+                        selectedModule.Render();
+                    }
+                    catch { }
+                }).Start();
+            }
+            catch { }
+        }
+
 
         private void OnFinishedLoading(object sender)
         {
