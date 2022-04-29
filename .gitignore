@@ -4,6 +4,7 @@ Webuntis/Webuntis-Desktop/bin/*
 Webuntis/Webuntis-Desktop/obj/*
 Webuntis/WebuntisApiTest/obj/*
 Webuntis/WebuntisApiTest/bin/*
+Webuntis/temp/*
 Webuntis/.vs/*
 
 Webuntis/Webuntis-Desktop/bin/Debug/net5.0-windows/Webuntis-Desktop.dll

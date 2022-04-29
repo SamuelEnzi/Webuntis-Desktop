@@ -95,8 +95,13 @@ namespace Webuntis_Desktop
         {
             new Thread(() =>
             {
+                try
+                {
+                    Directory.Delete("temp", true);
+                }
+                catch { }
                 var executablepath = $"{AppDomain.CurrentDomain.BaseDirectory}Webuntis-Desktop.exe";
-                var startCommand = $"\"{executablepath}\"";
+                var startCommand = $"start \"\" \"{executablepath}\"";
                 UpdateManager updateManager = new UpdateManager("ManamanaTheReal499", "Webuntis-Desktop");
                 var response = updateManager.GetFirtPackageAsync().Result;
                 if (response == null) return;
@@ -105,9 +110,16 @@ namespace Webuntis_Desktop
 
                 if (isSame == true) return;
 
-                var res = MessageBox.Show("Es ist ein Update verfügbar. Möchten Sie es herunterladen?", "Update", MessageBoxButton.YesNo);
+                var res = MessageBox.Show($"Es ist ein Update verfügbar. Möchten Sie es herunterladen?\nDrücken Sie 'Nein' um diese Verion zu überspringen.\n\nPatch notes:\n{response.body}", "Update", MessageBoxButton.YesNo);
 
-                if (res != MessageBoxResult.Yes) return;
+                if (res == MessageBoxResult.No) 
+                {
+                    updateManager.CurrentVersionMeta!.Patch(response!);
+                    return;
+                };
+
+                if (res != MessageBoxResult.Yes)
+                    return;
 
                 updateManager.DownloadFile(response!, (path) =>
                 {

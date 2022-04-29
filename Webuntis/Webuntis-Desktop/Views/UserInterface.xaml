@@ -32,7 +32,10 @@
                         <StackPanel Margin="10" Orientation="Horizontal">
                             <Image RenderOptions.BitmapScalingMode="Fant" Height="40" Source="/Views/WebuntisLOGO.png"/>
                             <StackPanel Margin="10" VerticalAlignment="Center">
-                                <Label Padding="0" FontSize="14" FontFamily="/Fonts/#Cascadia Mono">WebUntis - Desktop</Label>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Padding="0" FontSize="14" FontFamily="/Fonts/#Cascadia Mono">WebUntis - Desktop</Label>
+                                    <Label Padding="0" Opacity="0.6" Margin="2 0 0 0" FontSize="8" FontFamily="/Fonts/#Cascadia Mono">+</Label>
+                                </StackPanel>
                                 <Label Padding="0" Opacity="0.6" FontSize="8" FontFamily="/Fonts/#Cascadia Mono">LBS Brixen Ch.J.Tschuggmall</Label>
                             </StackPanel>
                         </StackPanel>
