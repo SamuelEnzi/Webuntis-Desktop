@@ -89,7 +89,7 @@ namespace Webuntis_Desktop.Modules
             });
 
             avr /= subjects.Where(x => x.Noten.Count > 0).ToList().Count;
-            avr = Math.Round(avr *4,0) /4;
+            avr = Math.Round(avr,2);
             Dispatcher.Invoke(() => UI_AvrLable.Content = $"Notendurchschnitt: {avr}");
             Dispatcher.Invoke(() => UI_votesOutput.ItemsSource = data.DefaultView);
             OnFinishedLoading?.Invoke(this);
