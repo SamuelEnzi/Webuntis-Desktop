@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Webuntis-Desktop"
-#define MyAppVersion "1.8.6"
+#define MyAppVersion "1.9.0"
 #define MyAppPublisher "L8 Studios"
 #define MyAppExeName "Webuntis-Desktop.exe"
 
@@ -42,6 +42,8 @@ Source: "E:\development\Webuntis-Desktop\Webuntis\publish\Newtonsoft.Json.dll"; 
 Source: "E:\development\Webuntis-Desktop\Webuntis\publish\System.Security.Cryptography.ProtectedData.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\development\Webuntis-Desktop\Webuntis\publish\Webuntis-API.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\development\Webuntis-Desktop\Webuntis\publish\Webuntis-API.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\development\Webuntis-Desktop\Webuntis\publish\UpdateManager-Core5.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\development\Webuntis-Desktop\Webuntis\publish\UpdateManager-Core5.pdb"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
