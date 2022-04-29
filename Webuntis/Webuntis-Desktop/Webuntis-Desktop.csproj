@@ -73,6 +73,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="UpdateManager-Core5">
+      <HintPath>..\..\..\UpdateManager\UpdateManager\UpdateManager-Core5\bin\Debug\net5.0\UpdateManager-Core5.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Modules\back.png" />
     <Resource Include="Modules\next.png" />
     <Resource Include="Modules\reload.png" />

@@ -3,6 +3,8 @@ using System.Configuration;
 using System.IO;
 using System.Windows;
 using Webuntis_API;
+using UpdateManager_Core;
+using System.Threading;
 
 namespace Webuntis_Desktop
 {
@@ -18,6 +20,7 @@ namespace Webuntis_Desktop
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            CheckForUpdateAsync();
             while (true)
             {
                 var filename = ConfigurationManager.AppSettings["SecretFileName"]?.ToString() != null ? ConfigurationManager.AppSettings["SecretFileName"]?.ToString() : "usData.sha";
@@ -88,5 +91,30 @@ namespace Webuntis_Desktop
             }
         }
 
+        public void CheckForUpdateAsync()
+        {
+            new Thread(() =>
+            {
+                var executablepath = $"{AppDomain.CurrentDomain.BaseDirectory}Webuntis-Desktop.exe";
+                var startCommand = $"\"{executablepath}\"";
+                UpdateManager updateManager = new UpdateManager("ManamanaTheReal499", "Webuntis-Desktop");
+                var response = updateManager.GetFirtPackageAsync().Result;
+                if (response == null) return;
+
+                var isSame = updateManager.CurrentVersionMeta?.CheckVersion(response!);
+
+                if (isSame == true) return;
+
+                var res = MessageBox.Show("Es ist ein Update verfügbar. Möchten Sie es herunterladen?", "Update", MessageBoxButton.YesNo);
+
+                if (res != MessageBoxResult.Yes) return;
+
+                updateManager.DownloadFile(response!, (path) =>
+                {
+                    updateManager.CurrentVersionMeta!.Patch(response!);
+                    updateManager.Install(startCommand);
+                });
+            }).Start();
+        }
     }
 }
