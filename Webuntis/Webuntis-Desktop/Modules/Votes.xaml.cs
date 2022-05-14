@@ -57,7 +57,7 @@ namespace Webuntis_Desktop.Modules
             {
                 string delimiter = "; ";
                 string markRequired = string.Join(delimiter, MarksToTarget(x.Noten.Where(x => x > 3).ToList(), targetMark)).Trim().Trim(';');
-                var entry = CreateSubjectEntry(x.Fach != null ? x.Fach : "", x.Noten, markRequired);
+                var entry = CreateSubjectEntry(x.Fach != null ? x.Fach : "", x.Noten.Where(x => x > 3).ToList(), markRequired);
                 avr += entry.Grades.Average();
                 entries.Add(entry);
             });
