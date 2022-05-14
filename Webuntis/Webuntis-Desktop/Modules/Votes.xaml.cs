@@ -44,9 +44,6 @@ namespace Webuntis_Desktop.Modules
             Webuntis_API.Models.LessonInfo.Root lessons = user.GetLessons(client);
             List<Webuntis_Desktop.Models.SubjectGradesModel> subjects = new List<SubjectGradesModel>();
 
-            DataTable data = new DataTable();
-            data.Columns.Add("Fach");
-
             lessons.data.lessons.ForEach(x =>
             {
                 SubjectGradesModel subject = new SubjectGradesModel(x.subjects, 6);
@@ -54,46 +51,30 @@ namespace Webuntis_Desktop.Modules
                 x.GetGrades(user, client).data.grades.ForEach(x => subject.AddMark(x.mark.markDisplayValue));
             });
 
-            int columnCount = Math.Max(subjects.Max(x => x.Noten.Count), 9);
-            for (int i = 0; i < columnCount; i++)
-            {
-                DataColumn column = new DataColumn();
-                column.ColumnName = i.ToString();
-                data.Columns.Add(column);
-            }
-
-            data.Columns.Add("Durchschnitt");
-            data.Columns.Add("Gerundet");
-            data.Columns.Add($"Auf {targetMark}");
-
+            List<SubjectGradesEntry> entries = new List<SubjectGradesEntry>();
             double avr = 0;
-
-
             subjects.Where(x => x.Noten.Count > 0).ToList().ForEach(x =>
             {
-                List<object> subject = new List<object> { x.Fach! };
-                subject.AddRange(x.Noten.Where(x=> x > 3).ToList().Cast<object>());
-                if (subject.Count < columnCount + 1)
-                    subject.AddRange(new string[columnCount - (subject.Count - 1)]);
-                subject.Add(x.Durchschnitt);
-                subject.Add(x.Gerundet);
-                
                 string delimiter = "; ";
-                string markRequired = string.Join(delimiter,  MarksToTarget(x.Noten.Where(x => x > 3).ToList(), targetMark)).Trim().Trim(';');
-                subject.Add(markRequired);
-
-                DataRow dr = data.NewRow();
-                dr.ItemArray = subject.ToArray();
-                avr += x.Noten.Where(x => x > 3).Average();
-                data.Rows.Add(dr);
+                string markRequired = string.Join(delimiter, MarksToTarget(x.Noten.Where(x => x > 3).ToList(), targetMark)).Trim().Trim(';');
+                var entry = CreateSubjectEntry(x.Fach != null ? x.Fach : "", x.Noten, markRequired);
+                avr += entry.Grades.Average();
+                entries.Add(entry);
             });
 
-            avr /= subjects.Where(x => x.Noten.Count > 0).ToList().Count;
+            avr /= subjects.Where(x => x.Noten.Count > 0).ToList().Count();
             avr = Math.Round(avr,2);
             Dispatcher.Invoke(() => UI_AvrLable.Content = $"Notendurchschnitt: {avr}");
-            Dispatcher.Invoke(() => UI_votesOutput.ItemsSource = data.DefaultView);
+            Dispatcher.Invoke(() => 
+            {
+                UI_MarkTable.Set(entries);
+                UI_MarkTable.Render();
+            });
             OnFinishedLoading?.Invoke(this);
         }
+
+        public Models.SubjectGradesEntry CreateSubjectEntry(string SubjectName, List<double> Grades, string GradesToTarget) =>
+            new Models.SubjectGradesEntry(SubjectName, Grades, GradesToTarget);
 
         /// <summary>
         /// created by ISAAC

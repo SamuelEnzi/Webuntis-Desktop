@@ -19,6 +19,15 @@
     <Compile Update="Modules\Votes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\WU_Grade.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\WU_MarkEntry.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\WU_MarkTable.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\WU_OverviewEntry.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +58,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Votes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\WU_Grade.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\WU_MarkEntry.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\WU_MarkTable.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\WU_OverviewEntry.xaml">
