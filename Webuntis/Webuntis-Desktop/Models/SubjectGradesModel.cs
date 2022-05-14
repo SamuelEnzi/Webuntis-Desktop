@@ -8,21 +8,31 @@ namespace Webuntis_Desktop.Models
 {
     internal class SubjectGradesModel
     {
-        public string? Fach { get; set; }
-        public List<double> Noten { get; set; } = new List<double>();
-        public double Durchschnitt { get => Math.Round(Noten.Where(x=>x>3).Sum() / Noten.Where(x => x > 3).ToList().Count, 2); }
-        public double Gerundet { get => Math.Round(Durchschnitt); }
-        public double reachTarget { get => Math.Round(Zielnote * Noten.Where(x => x > 3).ToList().Count - Noten.Where(x=>x > 3).Sum() + Zielnote, 2); }
-        public double Zielnote { get; set; }
-
-
+        public string? Subject { get; set; }
+        public List<GradeModel> Grades { get; set; } = new List<GradeModel>();
         public SubjectGradesModel() { }
-        public SubjectGradesModel(string subject, double target)
+        public SubjectGradesModel(string subject) =>
+             this.Subject = subject;
+
+        //public void AddMark(double mark) =>Noten.Add(mark);
+        public void AddMark(GradeModel model) =>
+            Grades.Add(model);
+
+    }
+
+    public class GradeModel
+    {
+        public double Grade { get; set; }
+        public string Date { get; set; }
+        public string Description { get; set; }
+
+        public GradeModel(double Grade, string Date, string Description)
         {
-            this.Fach = subject;
-            this.Zielnote = target;
+            this.Grade = Grade;
+            this.Date = Date;
+            this.Description = Description;
         }
 
-        public void AddMark(double mark) =>Noten.Add(mark);
+
     }
 }

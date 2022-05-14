@@ -46,23 +46,23 @@ namespace Webuntis_Desktop.Modules
 
             lessons.data.lessons.ForEach(x =>
             {
-                SubjectGradesModel subject = new SubjectGradesModel(x.subjects, 6);
+                SubjectGradesModel subject = new SubjectGradesModel(x.subjects);
                 subjects.Add(subject);
-                x.GetGrades(user, client).data.grades.ForEach(x => subject.AddMark(x.mark.markDisplayValue));
+                x.GetGrades(user, client).data.grades.ForEach(x => subject.AddMark(new GradeModel(x.mark.markDisplayValue,x.date.ParseDate(),x.text)));
             });
 
             List<SubjectGradesEntry> entries = new List<SubjectGradesEntry>();
             double avr = 0;
-            subjects.Where(x => x.Noten.Count > 0).ToList().ForEach(x =>
+            subjects.Where(x => x.Grades.Count > 0).ToList().ForEach(x =>
             {
                 string delimiter = "; ";
-                string markRequired = string.Join(delimiter, MarksToTarget(x.Noten.Where(x => x > 3).ToList(), targetMark)).Trim().Trim(';');
-                var entry = CreateSubjectEntry(x.Fach != null ? x.Fach : "", x.Noten.Where(x => x > 3).ToList(), markRequired);
-                avr += entry.Grades.Average();
+                string markRequired = string.Join(delimiter, MarksToTarget(x.Grades.Where(x => x.Grade > 3).ToList(), targetMark)).Trim().Trim(';');
+                var entry = CreateSubjectEntry(x.Subject != null ? x.Subject : "", x.Grades.Where(x => x.Grade > 3).ToList(), markRequired);
+                avr += entry.Avrage;
                 entries.Add(entry);
             });
 
-            avr /= subjects.Where(x => x.Noten.Count > 0).ToList().Count();
+            avr /= subjects.Where(x => x.Grades.Count > 0).ToList().Count();
             avr = Math.Round(avr,2);
             Dispatcher.Invoke(() => UI_AvrLable.Content = $"Notendurchschnitt: {avr}");
             Dispatcher.Invoke(() => 
@@ -73,7 +73,7 @@ namespace Webuntis_Desktop.Modules
             OnFinishedLoading?.Invoke(this);
         }
 
-        public Models.SubjectGradesEntry CreateSubjectEntry(string SubjectName, List<double> Grades, string GradesToTarget) =>
+        public Models.SubjectGradesEntry CreateSubjectEntry(string SubjectName, List<GradeModel> Grades, string GradesToTarget) =>
             new Models.SubjectGradesEntry(SubjectName, Grades, GradesToTarget);
 
         /// <summary>
@@ -82,18 +82,33 @@ namespace Webuntis_Desktop.Modules
         /// <param name="marks"></param>
         /// <param name="targetMark"></param>
         /// <returns></returns>
-        public IEnumerable<double?> MarksToTarget(List<double> marks, double targetMark)
+        public IEnumerable<double?> MarksToTarget(List<GradeModel> Grades, double targetMark)
         {
+            var marks = Grades;
             do
             {
-                var target = Math.Clamp((targetMark * (marks.Count + 1) - marks.Sum()), 4, 10);
+                var target = Math.Clamp((targetMark * (marks.Count + 1) - MarkSum(marks)), 4, 10);
 
                 if (target > 4)
                     target = Math.Round(target * 4, 0) / 4;
 
                 yield return target;
-                marks.Add(target);
-            } while (marks.Average() != 6.0 && marks.Count < 10);
+                marks.Add(new GradeModel(target,"",""));
+            } while (MarkAvrage(marks) != 6.0 && marks.Count < 10);
+        }
+
+        private double MarkSum(List<GradeModel> marks)
+        {
+            double sum = 0;
+            marks.ForEach((x) => sum += x.Grade);
+            return sum;
+        }
+
+        private double MarkAvrage(List<GradeModel> marks)
+        {
+            double sum = 0;
+            marks.ForEach((x) => sum += x.Grade);
+            return sum / marks.Count;
         }
 
         private void UI_TargetVoteInput_TextChanged(object sender, TextChangedEventArgs e)

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Webuntis_Desktop.Models;
 
 namespace Webuntis_Desktop.UserControls
 {
@@ -23,10 +24,10 @@ namespace Webuntis_Desktop.UserControls
         public string SubjectName { get; set; }
         public string Avrege { get; set; }
         public string GradesToTarget { get; set; }
-        public List<double> Grades { get; set; } = new();
+        public List<GradeModel> Grades { get; set; } = new();
         public Brush AvrageForeground { get; set; }
 
-        public WU_MarkEntry(string SubjectName, string Avrege, string GradesToTarget, List<double> Grades, Brush AvrageForeground)
+        public WU_MarkEntry(string SubjectName, string Avrege, string GradesToTarget, List<GradeModel> Grades, Brush AvrageForeground)
         {
             InitializeComponent();
             this.SubjectName =  SubjectName;
@@ -37,7 +38,7 @@ namespace Webuntis_Desktop.UserControls
 
             this.Grades.ForEach((grade) =>
             {
-                var element = new WU_Grade(grade.ToString(), GradeColor(grade));
+                var element = new WU_Grade(grade, GradeColor(grade.Grade));
                 UI_GradesContainer.Children.Add(element);
             });
 

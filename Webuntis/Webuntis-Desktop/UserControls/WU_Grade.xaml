@@ -13,5 +13,6 @@
             </Rectangle.Effect>
         </Rectangle>
         <Label Foreground="{Binding Path=ForegroundColor}" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Path=GradeContent}"></Label>
+        <Rectangle Fill="Transparent" x:Name="UI_HoverPanel"></Rectangle>
     </Grid>
 </UserControl>
