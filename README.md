@@ -1,3 +1,6 @@
+#!NO LONGER SUPPORTED!
+fork repo and recompile if you want to use this application :)
+
 # Webuntis-Desktop
  
 ### English
